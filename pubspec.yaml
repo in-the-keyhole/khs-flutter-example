@@ -30,11 +30,3 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
-
-  fonts:
-    - family: Mulish
-      fonts:
-        - asset: fonts/Mulish-Regular.ttf
-          weight: 300
-        - asset: fonts/Mulish-Bold.ttf
-          weight: 700
