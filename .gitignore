@@ -1,4 +1,15 @@
+# Environment files
 .env
+.env.*
+!.env.example
+!.env.*.example
+
+# Node.js
+node_modules/
+package-lock.json
+
+# Test coverage
+coverage/
 
 # Miscellaneous
 *.class
@@ -45,3 +56,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# CocoaPods
+ios/Pods/
+macos/Pods/
+ios/Podfile.lock
+macos/Podfile.lock

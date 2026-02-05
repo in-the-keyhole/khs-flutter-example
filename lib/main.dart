@@ -1,20 +1,33 @@
 import 'package:flutter/material.dart';
 
 import 'src/app.dart';
-import 'src/controllers/settings_controller.dart';
-import 'src/services/settings_service.dart';
+import 'src/clients/download_llm_client.dart';
+import 'src/clients/local_database_client.dart';
+import 'src/clients/local_filesystem_client.dart';
+import 'src/clients/local_fllama_client.dart';
+import 'src/clients/local_preferences_client.dart';
+import 'src/models/interfaces/client_interface.dart';
 
 void main() async {
-  // Set up the SettingsController, which will glue user settings to multiple
-  // Flutter Widgets.
-  final settingsController = SettingsController(SettingsService());
+  // Ensure Flutter binding is initialized before using async operations
+  WidgetsFlutterBinding.ensureInitialized();
 
-  // Load the user's preferred theme while the splash screen is displayed.
-  // This prevents a sudden theme change when the app is first displayed.
-  await settingsController.loadSettings();
+  // Initialize all clients
+  final localPreferencesClient = LocalPreferencesClient();
+  final localFllamaClient = LocalFllamaClient();
+  final localFilesystemClient = LocalFilesystemClient();
+  final modelDownloadClient = DownloadLlmClient();
+  final localDatabaseClient = LocalDatabaseClient();
 
-  // Run the app and pass in the SettingsController. The app listens to the
-  // SettingsController for changes, then passes it further down to the
-  // SettingsView.
-  runApp(MyApp(settingsController: settingsController));
+  // Wrap clients in interface for dependency injection
+  final clients = ClientInterface(
+    preferences: localPreferencesClient,
+    fllama: localFllamaClient,
+    filesystem: localFilesystemClient,
+    modelDownload: modelDownloadClient,
+    database: localDatabaseClient,
+  );
+
+  // Run the app with injected client interface
+  runApp(MyApp(clients: clients));
 }

@@ -1,0 +1,150 @@
+{
+  "appTitle": "khs_flutter_example",
+  "@appTitle": {
+    "description": "El título de la aplicación"
+  },
+  "homeTitle": "Inicio",
+  "@homeTitle": {
+    "description": "Título de la página de inicio"
+  },
+  "homeGreeting": "¡Hola Mundo!",
+  "@homeGreeting": {
+    "description": "Mensaje de bienvenida en la página de inicio"
+  },
+  "settingsTitle": "Configuración",
+  "@settingsTitle": {
+    "description": "Título de la página de configuración"
+  },
+  "themeHeading": "Tema",
+  "@themeHeading": {
+    "description": "Encabezado de la sección de configuración de tema"
+  },
+  "themeSystem": "Tema del Sistema",
+  "@themeSystem": {
+    "description": "Etiqueta para la opción de tema del sistema"
+  },
+  "themeLight": "Tema Claro",
+  "@themeLight": {
+    "description": "Etiqueta para la opción de tema claro"
+  },
+  "themeDark": "Tema Oscuro",
+  "@themeDark": {
+    "description": "Etiqueta para la opción de tema oscuro"
+  },
+  "navHome": "Inicio",
+  "@navHome": {
+    "description": "Etiqueta para el elemento de navegación de inicio"
+  },
+  "navSettings": "Configuración",
+  "@navSettings": {
+    "description": "Etiqueta para el elemento de navegación de configuración"
+  },
+  "languageHeading": "Idioma",
+  "@languageHeading": {
+    "description": "Encabezado de la sección de configuración de idioma"
+  },
+  "languageSystem": "Idioma del Sistema",
+  "@languageSystem": {
+    "description": "Etiqueta para la opción de idioma del sistema"
+  },
+  "languageEnglish": "Inglés",
+  "@languageEnglish": {
+    "description": "Etiqueta para la opción de idioma inglés"
+  },
+  "languageSpanish": "Español",
+  "@languageSpanish": {
+    "description": "Etiqueta para la opción de idioma español"
+  },
+  "navLlmChat": "Chat IA",
+  "@navLlmChat": {
+    "description": "Etiqueta para el elemento de navegación de chat LLM"
+  },
+  "llmChatTitle": "Chat IA",
+  "@llmChatTitle": {
+    "description": "Título de la página de chat LLM"
+  },
+  "llmLoadModelTitle": "Cargar Modelo",
+  "@llmLoadModelTitle": {
+    "description": "Título del diálogo para cargar modelo"
+  },
+  "llmLoadModelDescription": "Ingresa la ruta a un archivo de modelo GGUF en tu dispositivo.",
+  "@llmLoadModelDescription": {
+    "description": "Texto descriptivo en el diálogo de cargar modelo"
+  },
+  "llmModelPathLabel": "Ruta del Modelo",
+  "@llmModelPathLabel": {
+    "description": "Etiqueta para el campo de ruta del modelo"
+  },
+  "llmLoadButton": "Cargar",
+  "@llmLoadButton": {
+    "description": "Etiqueta para el botón de cargar modelo"
+  },
+  "llmStopGeneration": "Detener",
+  "@llmStopGeneration": {
+    "description": "Tooltip para el botón de detener generación"
+  },
+  "llmClearChat": "Limpiar Chat",
+  "@llmClearChat": {
+    "description": "Elemento de menú para limpiar mensajes del chat"
+  },
+  "llmUnloadModel": "Descargar Modelo",
+  "@llmUnloadModel": {
+    "description": "Elemento de menú para descargar el modelo"
+  },
+  "llmStartChatting": "¡Comienza a chatear!",
+  "@llmStartChatting": {
+    "description": "Texto de marcador cuando el chat está vacío pero el modelo está cargado"
+  },
+  "llmLoadModelFirst": "Carga un modelo para comenzar a chatear",
+  "@llmLoadModelFirst": {
+    "description": "Texto de marcador cuando no hay modelo cargado"
+  },
+  "llmInputHint": "Escribe un mensaje...",
+  "@llmInputHint": {
+    "description": "Texto de sugerencia para el campo de entrada del chat"
+  },
+  "cancel": "Cancelar",
+  "@cancel": {
+    "description": "Etiqueta genérica para botón de cancelar"
+  },
+  "llmBrowseModels": "Explorar Modelos",
+  "@llmBrowseModels": {
+    "description": "Botón para abrir el explorador de modelos"
+  },
+  "llmModelBrowserTitle": "Modelos Disponibles",
+  "@llmModelBrowserTitle": {
+    "description": "Título del diálogo del explorador de modelos"
+  },
+  "llmDownloadModel": "Descargar",
+  "@llmDownloadModel": {
+    "description": "Botón para descargar un modelo"
+  },
+  "llmUseModel": "Usar",
+  "@llmUseModel": {
+    "description": "Botón para usar/cargar un modelo descargado"
+  },
+  "llmDeleteModel": "Eliminar",
+  "@llmDeleteModel": {
+    "description": "Botón para eliminar un modelo descargado"
+  },
+  "llmDownloading": "Descargando...",
+  "@llmDownloading": {
+    "description": "Texto de estado durante la descarga"
+  },
+  "llmDownloadComplete": "Descarga completada",
+  "@llmDownloadComplete": {
+    "description": "Texto de estado cuando termina la descarga"
+  },
+  "llmDownloadFailed": "Descarga fallida",
+  "@llmDownloadFailed": {
+    "description": "Texto de estado cuando falla la descarga"
+  },
+  "llmPickFromDevice": "Elegir del dispositivo",
+  "@llmPickFromDevice": {
+    "description": "Opción para elegir un archivo de modelo del almacenamiento del dispositivo"
+  },
+  "llmPickFromDeviceSubtitle": "Selecciona un archivo de modelo .gguf de tu dispositivo",
+  "@llmPickFromDeviceSubtitle": {
+    "description": "Subtítulo para la opción de elegir del dispositivo"
+  }
+}

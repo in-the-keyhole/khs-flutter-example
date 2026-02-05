@@ -2,5 +2,149 @@
   "appTitle": "khs_flutter_example",
   "@appTitle": {
     "description": "The title of the application"
+  },
+  "homeTitle": "Home",
+  "@homeTitle": {
+    "description": "Title for the home page"
+  },
+  "homeGreeting": "Hello World!",
+  "@homeGreeting": {
+    "description": "Greeting message displayed on the home page"
+  },
+  "settingsTitle": "Settings",
+  "@settingsTitle": {
+    "description": "Title for the settings page"
+  },
+  "themeHeading": "Theme",
+  "@themeHeading": {
+    "description": "Heading for the theme settings section"
+  },
+  "themeSystem": "System Theme",
+  "@themeSystem": {
+    "description": "Label for system theme option"
+  },
+  "themeLight": "Light Theme",
+  "@themeLight": {
+    "description": "Label for light theme option"
+  },
+  "themeDark": "Dark Theme",
+  "@themeDark": {
+    "description": "Label for dark theme option"
+  },
+  "navHome": "Home",
+  "@navHome": {
+    "description": "Label for home navigation item"
+  },
+  "navSettings": "Settings",
+  "@navSettings": {
+    "description": "Label for settings navigation item"
+  },
+  "languageHeading": "Language",
+  "@languageHeading": {
+    "description": "Heading for the language settings section"
+  },
+  "languageSystem": "System Language",
+  "@languageSystem": {
+    "description": "Label for system language option"
+  },
+  "languageEnglish": "English",
+  "@languageEnglish": {
+    "description": "Label for English language option"
+  },
+  "languageSpanish": "Spanish",
+  "@languageSpanish": {
+    "description": "Label for Spanish language option"
+  },
+  "navLlmChat": "AI Chat",
+  "@navLlmChat": {
+    "description": "Label for LLM chat navigation item"
+  },
+  "llmChatTitle": "AI Chat",
+  "@llmChatTitle": {
+    "description": "Title for the LLM chat page"
+  },
+  "llmLoadModelTitle": "Load Model",
+  "@llmLoadModelTitle": {
+    "description": "Title for load model dialog"
+  },
+  "llmLoadModelDescription": "Enter the path to a GGUF model file on your device.",
+  "@llmLoadModelDescription": {
+    "description": "Description text in load model dialog"
+  },
+  "llmModelPathLabel": "Model Path",
+  "@llmModelPathLabel": {
+    "description": "Label for model path input field"
+  },
+  "llmLoadButton": "Load",
+  "@llmLoadButton": {
+    "description": "Label for load model button"
+  },
+  "llmStopGeneration": "Stop",
+  "@llmStopGeneration": {
+    "description": "Tooltip for stop generation button"
+  },
+  "llmClearChat": "Clear Chat",
+  "@llmClearChat": {
+    "description": "Menu item to clear chat messages"
+  },
+  "llmUnloadModel": "Unload Model",
+  "@llmUnloadModel": {
+    "description": "Menu item to unload the model"
+  },
+  "llmStartChatting": "Start chatting!",
+  "@llmStartChatting": {
+    "description": "Placeholder text when chat is empty but model is loaded"
+  },
+  "llmLoadModelFirst": "Load a model to start chatting",
+  "@llmLoadModelFirst": {
+    "description": "Placeholder text when no model is loaded"
+  },
+  "llmInputHint": "Type a message...",
+  "@llmInputHint": {
+    "description": "Hint text for chat input field"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Generic cancel button label"
+  },
+  "llmBrowseModels": "Browse Models",
+  "@llmBrowseModels": {
+    "description": "Button to open model browser"
+  },
+  "llmModelBrowserTitle": "Available Models",
+  "@llmModelBrowserTitle": {
+    "description": "Title for model browser dialog"
+  },
+  "llmDownloadModel": "Download",
+  "@llmDownloadModel": {
+    "description": "Button to download a model"
+  },
+  "llmUseModel": "Use",
+  "@llmUseModel": {
+    "description": "Button to use/load a downloaded model"
+  },
+  "llmDeleteModel": "Delete",
+  "@llmDeleteModel": {
+    "description": "Button to delete a downloaded model"
+  },
+  "llmDownloading": "Downloading...",
+  "@llmDownloading": {
+    "description": "Status text while downloading"
+  },
+  "llmDownloadComplete": "Download complete",
+  "@llmDownloadComplete": {
+    "description": "Status text when download finishes"
+  },
+  "llmDownloadFailed": "Download failed",
+  "@llmDownloadFailed": {
+    "description": "Status text when download fails"
+  },
+  "llmPickFromDevice": "Pick from device",
+  "@llmPickFromDevice": {
+    "description": "Option to pick a model file from device storage"
+  },
+  "llmPickFromDeviceSubtitle": "Select a .gguf model file from your device",
+  "@llmPickFromDeviceSubtitle": {
+    "description": "Subtitle for pick from device option"
   }
 }

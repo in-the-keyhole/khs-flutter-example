@@ -1,51 +1,86 @@
 import 'package:flutter/material.dart';
 
-import '../controllers/settings_controller.dart';
+import '../components/molecules/dropdown.dart';
+import '../components/organisms/section.dart';
+import '../components/pages/generic_page.dart';
+import '../localization/app_localizations.dart';
+import '../models/interfaces/control_interface.dart';
 
-/// Displays the various settings that can be customized by the user.
-///
-/// When a user changes a setting, the SettingsController is updated and
-/// Widgets that listen to the SettingsController are rebuilt.
+/// Settings view for configuring theme and language preferences.
 class SettingsView extends StatelessWidget {
-  const SettingsView({super.key, required this.controller});
+  const SettingsView({
+    super.key,
+    required this.controls,
+  });
 
   static const routeName = '/settings';
 
-  final SettingsController controller;
+  final ControlInterface controls;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        // Glue the SettingsController to the theme selection DropdownButton.
-        //
-        // When a user selects a theme from the dropdown list, the
-        // SettingsController is updated, which rebuilds the MaterialApp.
-        child: DropdownButton<ThemeMode>(
-          // Read the selected themeMode from the controller
-          value: controller.themeMode,
-          // Call the updateThemeMode method any time the user selects a theme.
-          onChanged: controller.updateThemeMode,
-          items: const [
-            DropdownMenuItem(
-              value: ThemeMode.system,
-              child: Text('System Theme'),
+    final localizations = AppLocalizations.of(context)!;
+    final themeMode = controls.theme.mode;
+    final updateThemeMode = controls.theme.updateMode;
+    final locale = controls.locale.locale;
+    final updateLocale = controls.locale.updateLocale;
+
+    return GenericPage(
+      title: localizations.settingsTitle,
+      navigationController: controls.navigation,
+      semanticsId: 'view.settings',
+      sections: [
+        Section(
+          heading: localizations.themeHeading,
+          children: [
+            Dropdown<ThemeMode>(
+              value: themeMode,
+              onChanged: updateThemeMode,
+              semanticsIdentifier: 'view.settings.themeDropdown',
+              semanticsLabel: 'Theme selection',
+              items: [
+                DropdownMenuItem(
+                  value: ThemeMode.system,
+                  child: Text(localizations.themeSystem),
+                ),
+                DropdownMenuItem(
+                  value: ThemeMode.light,
+                  child: Text(localizations.themeLight),
+                ),
+                DropdownMenuItem(
+                  value: ThemeMode.dark,
+                  child: Text(localizations.themeDark),
+                ),
+              ],
             ),
-            DropdownMenuItem(
-              value: ThemeMode.light,
-              child: Text('Light Theme'),
-            ),
-            DropdownMenuItem(
-              value: ThemeMode.dark,
-              child: Text('Dark Theme'),
-            )
           ],
         ),
-      ),
+        Section(
+          heading: localizations.languageHeading,
+          children: [
+            Dropdown<Locale?>(
+              value: locale,
+              onChanged: updateLocale,
+              semanticsIdentifier: 'view.settings.languageDropdown',
+              semanticsLabel: 'Language selection',
+              items: [
+                DropdownMenuItem(
+                  value: null,
+                  child: Text(localizations.languageSystem),
+                ),
+                DropdownMenuItem(
+                  value: const Locale('en'),
+                  child: Text(localizations.languageEnglish),
+                ),
+                DropdownMenuItem(
+                  value: const Locale('es'),
+                  child: Text(localizations.languageSpanish),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
