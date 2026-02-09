@@ -4,7 +4,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'controllers/llm_controller.dart';
 import 'controllers/model_download_controller.dart';
 import 'controllers/locale_controller.dart';
-import 'controllers/navigation_controller.dart';
 import 'controllers/theme_controller.dart';
 import 'localization/app_localizations.dart';
 import 'models/interfaces/client_interface.dart';
@@ -51,7 +50,6 @@ class _MyAppState extends State<MyApp> {
     // Build controllers from service interface
     final themeController = ThemeController(_preferencesService);
     final localeController = LocaleController(_preferencesService);
-    final navigationController = NavigationController();
     _llmController = LlmController(
       llmCompletionService,
       llmModelsService,
@@ -73,7 +71,6 @@ class _MyAppState extends State<MyApp> {
     _controls = ControlInterface(
       theme: themeController,
       locale: localeController,
-      navigation: navigationController,
     );
 
     setState(() {
@@ -102,7 +99,6 @@ class _MyAppState extends State<MyApp> {
       listenable: Listenable.merge([
         _controls.theme,
         _controls.locale,
-        _controls.navigation,
         _llmController,
         _modelDownloadController,
       ]),

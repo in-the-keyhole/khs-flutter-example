@@ -4,7 +4,7 @@ import '../clients/local_filesystem_client.dart';
 import '../clients/download_llm_client.dart';
 import '../components/molecules/dropdown.dart';
 import '../components/organisms/section.dart';
-import '../components/pages/generic_page.dart';
+import '../components/templates/padded_template.dart';
 import '../controllers/llm_controller.dart';
 import '../controllers/model_download_controller.dart';
 import '../localization/app_localizations.dart';
@@ -69,11 +69,18 @@ class _SettingsViewState extends State<SettingsView> {
     final locale = widget.controls.locale.locale;
     final updateLocale = widget.controls.locale.updateLocale;
 
-    return GenericPage(
-      title: localizations.settingsTitle,
-      navigationController: widget.controls.navigation,
-      semanticsId: 'view.settings',
-      sections: [
+    return Semantics(
+      identifier: 'view.settings',
+      label: 'Page',
+      child: Scaffold(
+        key: const ValueKey('view.settings'),
+        appBar: AppBar(
+          key: const ValueKey('view.settings.appBar'),
+          title: Text(localizations.settingsTitle),
+        ),
+        body: ColumnTemplate(
+          semanticsId: 'view.settings.template',
+          sections: [
         Section(
           heading: localizations.modelHeading,
           children: [
@@ -267,7 +274,9 @@ class _SettingsViewState extends State<SettingsView> {
             ),
           ],
         ),
-      ],
+          ],
+        ),
+      ),
     );
   }
 }

@@ -169,11 +169,14 @@ class LocalFllamaClient {
       throw StateError('Failed to format chat messages.');
     }
 
+    // Pass common EOS tokens as stop sequences so the model stops
+    // before emitting them (e.g. TinyLlama emits </s>).
     return complete(
       prompt,
       onToken: onToken,
       maxTokens: maxTokens,
       temperature: temperature,
+      stopSequences: ['</s>', '<|im_end|>', '<|endoftext|>', '<|eot_id|>'],
     );
   }
 

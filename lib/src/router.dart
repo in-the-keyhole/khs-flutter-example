@@ -7,9 +7,10 @@ import 'controllers/model_download_controller.dart';
 import 'models/interfaces/control_interface.dart';
 import 'services/user_preferences_service.dart';
 import 'views/llm_chat_view.dart';
-import 'views/settings_view.dart';
 
-/// Router that handles navigation between views using the NavigationController.
+/// Router that renders the main chat view.
+///
+/// Settings is accessed via the app bar menu in the chat view.
 class AppRouter extends StatelessWidget {
   const AppRouter({
     super.key,
@@ -30,30 +31,13 @@ class AppRouter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Semantics(
-      identifier: 'view.router',
-      label: 'View router',
-      child: IndexedStack(
-        key: const ValueKey('view.router.indexedStack'),
-        index: controls.navigation.currentIndex,
-        children: [
-          LlmChatView(
-            controls: controls,
-            llmController: llmController,
-            modelDownloadController: modelDownloadController,
-            filesystemClient: filesystemClient,
-            modelDownloadClient: modelDownloadClient,
-          ),
-          SettingsView(
-            controls: controls,
-            llmController: llmController,
-            modelDownloadController: modelDownloadController,
-            preferencesService: preferencesService,
-            filesystemClient: filesystemClient,
-            modelDownloadClient: modelDownloadClient,
-          ),
-        ],
-      ),
+    return LlmChatView(
+      controls: controls,
+      llmController: llmController,
+      modelDownloadController: modelDownloadController,
+      preferencesService: preferencesService,
+      filesystemClient: filesystemClient,
+      modelDownloadClient: modelDownloadClient,
     );
   }
 }

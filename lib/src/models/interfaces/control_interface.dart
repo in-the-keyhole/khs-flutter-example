@@ -1,5 +1,4 @@
 import '../../controllers/locale_controller.dart';
-import '../../controllers/navigation_controller.dart';
 import '../../controllers/theme_controller.dart';
 
 /// Interface that holds references to all initialized controllers.
@@ -9,10 +8,8 @@ class ControlInterface {
   const ControlInterface({
     required this.theme,
     required this.locale,
-    required this.navigation,
   });
 
   final ThemeController theme;
   final LocaleController locale;
-  final NavigationController navigation;
 }

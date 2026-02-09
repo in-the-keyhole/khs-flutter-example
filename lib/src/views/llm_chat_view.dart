@@ -5,12 +5,13 @@ import '../clients/download_llm_client.dart';
 import '../components/molecules/chat_input.dart';
 import '../components/molecules/model_status.dart';
 import '../components/organisms/chat_message_list.dart';
-import '../components/templates/bottom_navigation.dart';
 import '../controllers/llm_controller.dart';
 import '../controllers/model_download_controller.dart';
 import '../localization/app_localizations.dart';
 import '../models/interfaces/control_interface.dart';
+import '../services/user_preferences_service.dart';
 import 'llm_models_view.dart';
+import 'settings_view.dart';
 
 /// LLM Chat view with local model inference.
 class LlmChatView extends StatefulWidget {
@@ -19,6 +20,7 @@ class LlmChatView extends StatefulWidget {
     required this.controls,
     required this.llmController,
     required this.modelDownloadController,
+    required this.preferencesService,
     required this.filesystemClient,
     required this.modelDownloadClient,
   });
@@ -28,6 +30,7 @@ class LlmChatView extends StatefulWidget {
   final ControlInterface controls;
   final LlmController llmController;
   final ModelDownloadController modelDownloadController;
+  final UserPreferencesService preferencesService;
   final LocalFilesystemClient filesystemClient;
   final DownloadLlmClient modelDownloadClient;
 
@@ -284,6 +287,21 @@ class _LlmChatViewState extends State<LlmChatView> {
                   case 'unload':
                     widget.llmController.unloadModel();
                     break;
+                  case 'settings':
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => SettingsView(
+                          controls: widget.controls,
+                          llmController: widget.llmController,
+                          modelDownloadController:
+                              widget.modelDownloadController,
+                          preferencesService: widget.preferencesService,
+                          filesystemClient: widget.filesystemClient,
+                          modelDownloadClient: widget.modelDownloadClient,
+                        ),
+                      ),
+                    );
+                    break;
                 }
               },
               itemBuilder: (context) => [
@@ -296,6 +314,10 @@ class _LlmChatViewState extends State<LlmChatView> {
                     value: 'unload',
                     child: Text(localizations.llmUnloadModel),
                   ),
+                PopupMenuItem(
+                  value: 'settings',
+                  child: Text(localizations.settingsTitle),
+                ),
               ],
             ),
           ],
@@ -344,10 +366,6 @@ class _LlmChatViewState extends State<LlmChatView> {
               semanticsId: 'view.llmChat.input',
             ),
           ],
-        ),
-        bottomNavigationBar: BottomNavigation(
-          navigationController: widget.controls.navigation,
-          semanticsId: 'view.llmChat.bottomNav',
         ),
       ),
     );
