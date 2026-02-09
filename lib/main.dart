@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'src/app.dart';
 import 'src/clients/download_llm_client.dart';
-import 'src/clients/local_database_client.dart';
 import 'src/clients/local_filesystem_client.dart';
 import 'src/clients/local_fllama_client.dart';
 import 'src/clients/local_preferences_client.dart';
@@ -17,7 +16,6 @@ void main() async {
   final localFllamaClient = LocalFllamaClient();
   final localFilesystemClient = LocalFilesystemClient();
   final modelDownloadClient = DownloadLlmClient();
-  final localDatabaseClient = LocalDatabaseClient();
 
   // Wrap clients in interface for dependency injection
   final clients = ClientInterface(
@@ -25,7 +23,6 @@ void main() async {
     fllama: localFllamaClient,
     filesystem: localFilesystemClient,
     modelDownload: modelDownloadClient,
-    database: localDatabaseClient,
   );
 
   // Run the app with injected client interface

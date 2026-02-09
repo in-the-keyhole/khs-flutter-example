@@ -12,12 +12,6 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'khs_flutter_example';
 
   @override
-  String get homeTitle => 'Home';
-
-  @override
-  String get homeGreeting => 'Hello World!';
-
-  @override
   String get settingsTitle => 'Settings';
 
   @override
@@ -31,9 +25,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get themeDark => 'Dark Theme';
-
-  @override
-  String get navHome => 'Home';
 
   @override
   String get navSettings => 'Settings';
@@ -120,4 +111,43 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get llmPickFromDeviceSubtitle =>
       'Select a .gguf model file from your device';
+
+  @override
+  String get modelHeading => 'Model';
+
+  @override
+  String get modelManage => 'Manage Models';
+
+  @override
+  String get modelNone => 'None';
+
+  @override
+  String get contextSizeHeading => 'Context Size';
+
+  @override
+  String get systemPromptHeading => 'System Prompt';
+
+  @override
+  String get systemPromptHint => 'Enter system prompt...';
+
+  @override
+  String get conversationsTitle => 'Conversations';
+
+  @override
+  String get newChat => 'New Chat';
+
+  @override
+  String get renameConversation => 'Rename';
+
+  @override
+  String get deleteConversation => 'Delete';
+
+  @override
+  String get deleteConversationConfirm => 'Delete this conversation?';
+
+  @override
+  String get renameDialogTitle => 'Rename Conversation';
+
+  @override
+  String get save => 'Save';
 }

@@ -24,41 +24,33 @@ class BottomNavigation extends StatelessWidget {
     return Semantics(
       identifier: semanticsId ?? 'bottomNav',
       label: 'Bottom navigation bar',
-      child: BottomNavigationBar(
+      child: NavigationBar(
         key: semanticsId != null
             ? ValueKey('$semanticsId.bar')
             : const ValueKey('bottomNav.bar'),
-        currentIndex: navigationController.currentIndex,
-        onTap: navigationController.navigateTo,
-        items: [
-          BottomNavigationBarItem(
-            icon: Semantics(
-              identifier: semanticsId != null
-                  ? '$semanticsId.home.icon'
-                  : 'bottomNav.home.icon',
-              label: 'Home icon',
-              child: const Icon(Icons.home),
-            ),
-            label: localizations.navHome,
-          ),
-          BottomNavigationBarItem(
+        selectedIndex: navigationController.currentIndex,
+        onDestinationSelected: navigationController.navigateTo,
+        destinations: [
+          NavigationDestination(
             icon: Semantics(
               identifier: semanticsId != null
                   ? '$semanticsId.llmChat.icon'
                   : 'bottomNav.llmChat.icon',
               label: 'AI Chat icon',
-              child: const Icon(Icons.smart_toy),
+              child: const Icon(Icons.smart_toy_outlined),
             ),
+            selectedIcon: const Icon(Icons.smart_toy),
             label: localizations.navLlmChat,
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: Semantics(
               identifier: semanticsId != null
                   ? '$semanticsId.settings.icon'
                   : 'bottomNav.settings.icon',
               label: 'Settings icon',
-              child: const Icon(Icons.settings),
+              child: const Icon(Icons.settings_outlined),
             ),
+            selectedIcon: const Icon(Icons.settings),
             label: localizations.navSettings,
           ),
         ],

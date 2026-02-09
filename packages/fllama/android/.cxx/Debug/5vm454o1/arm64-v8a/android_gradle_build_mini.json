@@ -1,0 +1,57 @@
+{
+  "buildFiles": [
+    "/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/android/src/main/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/bpalmer/Library/Android/sdk/cmake/3.31.0/bin/ninja",
+      "-C",
+      "/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/android/.cxx/Debug/5vm454o1/arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/bpalmer/Library/Android/sdk/cmake/3.31.0/bin/ninja",
+    "-C",
+    "/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/android/.cxx/Debug/5vm454o1/arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "fllama_v8_4_fp16_dotprod::@6890427a1f51a3e7e1df": {
+      "artifactName": "fllama_v8_4_fp16_dotprod",
+      "abi": "arm64-v8a",
+      "output": "/Users/bpalmer/Projects/Keyhole/khs-flutter-example/build/fllama/intermediates/cxx/Debug/5vm454o1/obj/arm64-v8a/libfllama_v8_4_fp16_dotprod.so",
+      "runtimeFiles": []
+    },
+    "fllama_v8_4_fp16_dotprod_i8mm::@6890427a1f51a3e7e1df": {
+      "artifactName": "fllama_v8_4_fp16_dotprod_i8mm",
+      "abi": "arm64-v8a",
+      "output": "/Users/bpalmer/Projects/Keyhole/khs-flutter-example/build/fllama/intermediates/cxx/Debug/5vm454o1/obj/arm64-v8a/libfllama_v8_4_fp16_dotprod_i8mm.so",
+      "runtimeFiles": []
+    },
+    "fllama_v8_2_fp16_dotprod::@6890427a1f51a3e7e1df": {
+      "artifactName": "fllama_v8_2_fp16_dotprod",
+      "abi": "arm64-v8a",
+      "output": "/Users/bpalmer/Projects/Keyhole/khs-flutter-example/build/fllama/intermediates/cxx/Debug/5vm454o1/obj/arm64-v8a/libfllama_v8_2_fp16_dotprod.so",
+      "runtimeFiles": []
+    },
+    "fllama::@6890427a1f51a3e7e1df": {
+      "artifactName": "fllama",
+      "abi": "arm64-v8a",
+      "output": "/Users/bpalmer/Projects/Keyhole/khs-flutter-example/build/fllama/intermediates/cxx/Debug/5vm454o1/obj/arm64-v8a/libfllama.so",
+      "runtimeFiles": []
+    },
+    "fllama_v8::@6890427a1f51a3e7e1df": {
+      "artifactName": "fllama_v8",
+      "abi": "arm64-v8a",
+      "output": "/Users/bpalmer/Projects/Keyhole/khs-flutter-example/build/fllama/intermediates/cxx/Debug/5vm454o1/obj/arm64-v8a/libfllama_v8.so",
+      "runtimeFiles": []
+    },
+    "fllama_v8_2_fp16::@6890427a1f51a3e7e1df": {
+      "artifactName": "fllama_v8_2_fp16",
+      "abi": "arm64-v8a",
+      "output": "/Users/bpalmer/Projects/Keyhole/khs-flutter-example/build/fllama/intermediates/cxx/Debug/5vm454o1/obj/arm64-v8a/libfllama_v8_2_fp16.so",
+      "runtimeFiles": []
+    }
+  }
+}

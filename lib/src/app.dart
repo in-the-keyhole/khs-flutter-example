@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'controllers/llm_controller.dart';
+import 'controllers/model_download_controller.dart';
 import 'controllers/locale_controller.dart';
 import 'controllers/navigation_controller.dart';
 import 'controllers/theme_controller.dart';
 import 'localization/app_localizations.dart';
 import 'models/interfaces/client_interface.dart';
 import 'models/interfaces/control_interface.dart';
-import 'models/interfaces/service_interface.dart';
-import 'services/kb_service.dart';
-import 'services/llm_service.dart';
-import 'services/preferences_service.dart';
+import 'services/conversation_storage_service.dart';
+import 'services/llm_completion_service.dart';
+import 'services/llm_models_service.dart';
+import 'services/user_preferences_service.dart';
 import 'router.dart';
 
 /// The Widget that configures the application.
@@ -27,6 +28,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   late ControlInterface _controls;
   late LlmController _llmController;
+  late ModelDownloadController _modelDownloadController;
+  late UserPreferencesService _preferencesService;
   bool _isInitialized = false;
 
   @override
@@ -37,24 +40,34 @@ class _MyAppState extends State<MyApp> {
 
   Future<void> _initializeApp() async {
     // Build services from client interface
-    final preferencesService = PreferencesService(widget.clients.preferences);
-    await preferencesService.init();
+    _preferencesService = UserPreferencesService(widget.clients.preferences);
+    await _preferencesService.init();
 
-    final kbService = KbService(widget.clients.database);
-    await kbService.init();
-
-    final llmService = LlmService(widget.clients.fllama);
-
-    final services = ServiceInterface(
-      preferences: preferencesService,
-      kb: kbService,
-    );
+    final llmCompletionService = LlmCompletionService(widget.clients.fllama);
+    final llmModelsService = LlmModelsService(widget.clients.fllama);
+    final conversationStorageService =
+        ConversationStorageService(widget.clients.filesystem);
 
     // Build controllers from service interface
-    final themeController = ThemeController(services.preferences);
-    final localeController = LocaleController(services.preferences);
+    final themeController = ThemeController(_preferencesService);
+    final localeController = LocaleController(_preferencesService);
     final navigationController = NavigationController();
-    _llmController = LlmController(llmService, kbService: services.kb);
+    _llmController = LlmController(
+      llmCompletionService,
+      llmModelsService,
+      preferencesService: _preferencesService,
+      conversationStorage: conversationStorageService,
+    );
+    await _llmController.loadConversations();
+    _modelDownloadController = ModelDownloadController(widget.clients.modelDownload);
+    await _modelDownloadController.init();
+
+    // Auto-load previously selected model if one was persisted
+    final savedModelPath = _preferencesService.selectedModelPath;
+    final savedModelName = _preferencesService.selectedModelName;
+    if (savedModelPath != null) {
+      _llmController.loadModel(savedModelPath, modelName: savedModelName);
+    }
 
     // Wrap controllers in control interface
     _controls = ControlInterface(
@@ -91,6 +104,7 @@ class _MyAppState extends State<MyApp> {
         _controls.locale,
         _controls.navigation,
         _llmController,
+        _modelDownloadController,
       ]),
       builder: (BuildContext context, Widget? child) {
         return MaterialApp(
@@ -152,6 +166,8 @@ class _MyAppState extends State<MyApp> {
           home: AppRouter(
             controls: _controls,
             llmController: _llmController,
+            modelDownloadController: _modelDownloadController,
+            preferencesService: _preferencesService,
             filesystemClient: widget.clients.filesystem,
             modelDownloadClient: widget.clients.modelDownload,
           ),

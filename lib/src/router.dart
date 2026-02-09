@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'clients/local_filesystem_client.dart';
 import 'clients/download_llm_client.dart';
 import 'controllers/llm_controller.dart';
+import 'controllers/model_download_controller.dart';
 import 'models/interfaces/control_interface.dart';
-import 'views/home_view.dart';
+import 'services/user_preferences_service.dart';
 import 'views/llm_chat_view.dart';
 import 'views/settings_view.dart';
 
@@ -14,12 +15,16 @@ class AppRouter extends StatelessWidget {
     super.key,
     required this.controls,
     required this.llmController,
+    required this.modelDownloadController,
+    required this.preferencesService,
     required this.filesystemClient,
     required this.modelDownloadClient,
   });
 
   final ControlInterface controls;
   final LlmController llmController;
+  final ModelDownloadController modelDownloadController;
+  final UserPreferencesService preferencesService;
   final LocalFilesystemClient filesystemClient;
   final DownloadLlmClient modelDownloadClient;
 
@@ -32,14 +37,21 @@ class AppRouter extends StatelessWidget {
         key: const ValueKey('view.router.indexedStack'),
         index: controls.navigation.currentIndex,
         children: [
-          HomeView(controls: controls),
           LlmChatView(
             controls: controls,
             llmController: llmController,
+            modelDownloadController: modelDownloadController,
             filesystemClient: filesystemClient,
             modelDownloadClient: modelDownloadClient,
           ),
-          SettingsView(controls: controls),
+          SettingsView(
+            controls: controls,
+            llmController: llmController,
+            modelDownloadController: modelDownloadController,
+            preferencesService: preferencesService,
+            filesystemClient: filesystemClient,
+            modelDownloadClient: modelDownloadClient,
+          ),
         ],
       ),
     );

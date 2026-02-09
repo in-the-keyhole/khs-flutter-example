@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:khs_flutter_example/src/clients/local_preferences_client.dart';
 import 'package:khs_flutter_example/src/controllers/theme_controller.dart';
-import 'package:khs_flutter_example/src/services/preferences_service.dart';
+import 'package:khs_flutter_example/src/services/user_preferences_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   group('ThemeController', () {
     late ThemeController controller;
-    late PreferencesService service;
+    late UserPreferencesService service;
     late LocalPreferencesClient client;
 
     setUp(() async {
       // Clear any existing preferences
       SharedPreferences.setMockInitialValues({});
       client = await LocalPreferencesClient.create();
-      service = PreferencesService(client);
+      service = UserPreferencesService(client);
       await service.init();
       controller = ThemeController(service);
     });
@@ -264,7 +264,7 @@ void main() {
         // Create new uninitialized service
         SharedPreferences.setMockInitialValues({});
         final uninitClient = await LocalPreferencesClient.create();
-        final uninitService = PreferencesService(uninitClient);
+        final uninitService = UserPreferencesService(uninitClient);
         final uninitController = ThemeController(uninitService);
 
         // Attempting to access mode before service init throws
@@ -283,7 +283,7 @@ void main() {
         await client.clear();
 
         // Create fresh service and controller
-        final newService = PreferencesService(client);
+        final newService = UserPreferencesService(client);
         await newService.init();
         final newController = ThemeController(newService);
 

@@ -3,14 +3,6 @@
   "@appTitle": {
     "description": "El título de la aplicación"
   },
-  "homeTitle": "Inicio",
-  "@homeTitle": {
-    "description": "Título de la página de inicio"
-  },
-  "homeGreeting": "¡Hola Mundo!",
-  "@homeGreeting": {
-    "description": "Mensaje de bienvenida en la página de inicio"
-  },
   "settingsTitle": "Configuración",
   "@settingsTitle": {
     "description": "Título de la página de configuración"
@@ -30,10 +22,6 @@
   "themeDark": "Tema Oscuro",
   "@themeDark": {
     "description": "Etiqueta para la opción de tema oscuro"
-  },
-  "navHome": "Inicio",
-  "@navHome": {
-    "description": "Etiqueta para el elemento de navegación de inicio"
   },
   "navSettings": "Configuración",
   "@navSettings": {
@@ -146,5 +134,57 @@
   "llmPickFromDeviceSubtitle": "Selecciona un archivo de modelo .gguf de tu dispositivo",
   "@llmPickFromDeviceSubtitle": {
     "description": "Subtítulo para la opción de elegir del dispositivo"
+  },
+  "modelHeading": "Modelo",
+  "@modelHeading": {
+    "description": "Encabezado de la sección de configuración de modelo"
+  },
+  "modelManage": "Administrar Modelos",
+  "@modelManage": {
+    "description": "Botón para abrir la pantalla de descarga de modelos"
+  },
+  "modelNone": "Ninguno",
+  "@modelNone": {
+    "description": "Etiqueta para ningún modelo seleccionado"
+  },
+  "contextSizeHeading": "Tamaño de Contexto",
+  "@contextSizeHeading": {
+    "description": "Encabezado de la sección de tamaño de contexto"
+  },
+  "systemPromptHeading": "Prompt del Sistema",
+  "@systemPromptHeading": {
+    "description": "Encabezado de la sección de prompt del sistema"
+  },
+  "systemPromptHint": "Ingresa el prompt del sistema...",
+  "@systemPromptHint": {
+    "description": "Texto de sugerencia para el campo de prompt del sistema"
+  },
+  "conversationsTitle": "Conversaciones",
+  "@conversationsTitle": {
+    "description": "Título del cajón de conversaciones"
+  },
+  "newChat": "Nuevo Chat",
+  "@newChat": {
+    "description": "Botón para iniciar una nueva conversación"
+  },
+  "renameConversation": "Renombrar",
+  "@renameConversation": {
+    "description": "Elemento de menú para renombrar una conversación"
+  },
+  "deleteConversation": "Eliminar",
+  "@deleteConversation": {
+    "description": "Elemento de menú para eliminar una conversación"
+  },
+  "deleteConversationConfirm": "¿Eliminar esta conversación?",
+  "@deleteConversationConfirm": {
+    "description": "Texto de confirmación para eliminar una conversación"
+  },
+  "renameDialogTitle": "Renombrar Conversación",
+  "@renameDialogTitle": {
+    "description": "Título del diálogo para renombrar conversación"
+  },
+  "save": "Guardar",
+  "@save": {
+    "description": "Etiqueta genérica para botón de guardar"
   }
 }

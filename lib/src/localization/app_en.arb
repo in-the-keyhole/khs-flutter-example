@@ -3,14 +3,6 @@
   "@appTitle": {
     "description": "The title of the application"
   },
-  "homeTitle": "Home",
-  "@homeTitle": {
-    "description": "Title for the home page"
-  },
-  "homeGreeting": "Hello World!",
-  "@homeGreeting": {
-    "description": "Greeting message displayed on the home page"
-  },
   "settingsTitle": "Settings",
   "@settingsTitle": {
     "description": "Title for the settings page"
@@ -30,10 +22,6 @@
   "themeDark": "Dark Theme",
   "@themeDark": {
     "description": "Label for dark theme option"
-  },
-  "navHome": "Home",
-  "@navHome": {
-    "description": "Label for home navigation item"
   },
   "navSettings": "Settings",
   "@navSettings": {
@@ -146,5 +134,57 @@
   "llmPickFromDeviceSubtitle": "Select a .gguf model file from your device",
   "@llmPickFromDeviceSubtitle": {
     "description": "Subtitle for pick from device option"
+  },
+  "modelHeading": "Model",
+  "@modelHeading": {
+    "description": "Heading for the model settings section"
+  },
+  "modelManage": "Manage Models",
+  "@modelManage": {
+    "description": "Button to open model download screen"
+  },
+  "modelNone": "None",
+  "@modelNone": {
+    "description": "Label for no model selected"
+  },
+  "contextSizeHeading": "Context Size",
+  "@contextSizeHeading": {
+    "description": "Heading for the context size settings section"
+  },
+  "systemPromptHeading": "System Prompt",
+  "@systemPromptHeading": {
+    "description": "Heading for the system prompt settings section"
+  },
+  "systemPromptHint": "Enter system prompt...",
+  "@systemPromptHint": {
+    "description": "Hint text for the system prompt input field"
+  },
+  "conversationsTitle": "Conversations",
+  "@conversationsTitle": {
+    "description": "Title for the conversations drawer"
+  },
+  "newChat": "New Chat",
+  "@newChat": {
+    "description": "Button to start a new conversation"
+  },
+  "renameConversation": "Rename",
+  "@renameConversation": {
+    "description": "Menu item to rename a conversation"
+  },
+  "deleteConversation": "Delete",
+  "@deleteConversation": {
+    "description": "Menu item to delete a conversation"
+  },
+  "deleteConversationConfirm": "Delete this conversation?",
+  "@deleteConversationConfirm": {
+    "description": "Confirmation text for deleting a conversation"
+  },
+  "renameDialogTitle": "Rename Conversation",
+  "@renameDialogTitle": {
+    "description": "Title for the rename conversation dialog"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Generic save button label"
   }
 }

@@ -1,0 +1,8 @@
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/ios/Cpp/json.hpp
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/ios/Cpp/fllama.hpp
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/ios/Cpp/stb_image.h
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/ios/Cpp/base64.hpp
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/ios/Cpp/clip.h
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/ios/Cpp/llava.h
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/ios/Cpp/fllava.hpp
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/android/src/main/utils.h

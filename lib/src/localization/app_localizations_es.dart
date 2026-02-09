@@ -12,12 +12,6 @@ class AppLocalizationsEs extends AppLocalizations {
   String get appTitle => 'khs_flutter_example';
 
   @override
-  String get homeTitle => 'Inicio';
-
-  @override
-  String get homeGreeting => '¡Hola Mundo!';
-
-  @override
   String get settingsTitle => 'Configuración';
 
   @override
@@ -31,9 +25,6 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get themeDark => 'Tema Oscuro';
-
-  @override
-  String get navHome => 'Inicio';
 
   @override
   String get navSettings => 'Configuración';
@@ -120,4 +111,43 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get llmPickFromDeviceSubtitle =>
       'Selecciona un archivo de modelo .gguf de tu dispositivo';
+
+  @override
+  String get modelHeading => 'Modelo';
+
+  @override
+  String get modelManage => 'Administrar Modelos';
+
+  @override
+  String get modelNone => 'Ninguno';
+
+  @override
+  String get contextSizeHeading => 'Tamaño de Contexto';
+
+  @override
+  String get systemPromptHeading => 'Prompt del Sistema';
+
+  @override
+  String get systemPromptHint => 'Ingresa el prompt del sistema...';
+
+  @override
+  String get conversationsTitle => 'Conversaciones';
+
+  @override
+  String get newChat => 'Nuevo Chat';
+
+  @override
+  String get renameConversation => 'Renombrar';
+
+  @override
+  String get deleteConversation => 'Eliminar';
+
+  @override
+  String get deleteConversationConfirm => '¿Eliminar esta conversación?';
+
+  @override
+  String get renameDialogTitle => 'Renombrar Conversación';
+
+  @override
+  String get save => 'Guardar';
 }

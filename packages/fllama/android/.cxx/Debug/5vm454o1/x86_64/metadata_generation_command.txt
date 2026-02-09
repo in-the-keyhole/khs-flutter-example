@@ -1,0 +1,24 @@
+                        -H/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/android/src/main
+-DCMAKE_SYSTEM_NAME=Android
+-DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+-DCMAKE_SYSTEM_VERSION=23
+-DANDROID_PLATFORM=android-23
+-DANDROID_ABI=x86_64
+-DCMAKE_ANDROID_ARCH_ABI=x86_64
+-DANDROID_NDK=/Users/bpalmer/Library/Android/sdk/ndk/28.0.12433566
+-DCMAKE_ANDROID_NDK=/Users/bpalmer/Library/Android/sdk/ndk/28.0.12433566
+-DCMAKE_TOOLCHAIN_FILE=/Users/bpalmer/Library/Android/sdk/ndk/28.0.12433566/build/cmake/android.toolchain.cmake
+-DCMAKE_MAKE_PROGRAM=/Users/bpalmer/Library/Android/sdk/cmake/3.31.0/bin/ninja
+-DCMAKE_C_FLAGS=-O3 -flto -ffunction-sections -fdata-sections -fvisibility=hidden -funroll-loops -fomit-frame-pointer
+-DCMAKE_CXX_FLAGS=-O3 -flto -ffunction-sections -fdata-sections -fvisibility=hidden -funroll-loops -fomit-frame-pointer
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/Users/bpalmer/Projects/Keyhole/khs-flutter-example/build/fllama/intermediates/cxx/Debug/5vm454o1/obj/x86_64
+-DCMAKE_RUNTIME_OUTPUT_DIRECTORY=/Users/bpalmer/Projects/Keyhole/khs-flutter-example/build/fllama/intermediates/cxx/Debug/5vm454o1/obj/x86_64
+-DCMAKE_BUILD_TYPE=Debug
+-B/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/android/.cxx/Debug/5vm454o1/x86_64
+-GNinja
+-Wl,--gc-sections
+-DANDROID_STL=c++_static
+-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON
+-Wl,-z,max-page-size=16384
+                        Build command args: []
+                        Version: 2

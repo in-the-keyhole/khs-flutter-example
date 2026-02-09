@@ -1,0 +1,4 @@
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/android/.cxx/Debug/56314o5c/x86_64/CMakeFiles/fllama.dir
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/android/.cxx/Debug/56314o5c/x86_64/CMakeFiles/fllama_x86_64.dir
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/android/.cxx/Debug/56314o5c/x86_64/CMakeFiles/edit_cache.dir
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/android/.cxx/Debug/56314o5c/x86_64/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,105 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.6.0"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "fllama",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4,
+						5
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "fllama::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-fllama-Debug-8a426252413dff2bcf8f.json",
+					"name" : "fllama",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "fllama_v8::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-fllama_v8-Debug-19aafea19184405d6946.json",
+					"name" : "fllama_v8",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "fllama_v8_2_fp16::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-fllama_v8_2_fp16-Debug-ad92445309286bc0251b.json",
+					"name" : "fllama_v8_2_fp16",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "fllama_v8_2_fp16_dotprod::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-fllama_v8_2_fp16_dotprod-Debug-563f0e67314c5aa4dfb4.json",
+					"name" : "fllama_v8_2_fp16_dotprod",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "fllama_v8_4_fp16_dotprod::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-fllama_v8_4_fp16_dotprod-Debug-3f7da95c19322e4e6e36.json",
+					"name" : "fllama_v8_4_fp16_dotprod",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "fllama_v8_4_fp16_dotprod_i8mm::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-fllama_v8_4_fp16_dotprod_i8mm-Debug-dd8eb9bfe9b7455f3195.json",
+					"name" : "fllama_v8_4_fp16_dotprod_i8mm",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/android/.cxx/Debug/56314o5c/arm64-v8a",
+		"source" : "/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/android/src/main"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}

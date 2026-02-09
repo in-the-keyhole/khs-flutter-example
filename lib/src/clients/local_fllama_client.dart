@@ -103,42 +103,39 @@ class LocalFllamaClient {
       throw StateError('Model not loaded. Call loadModel() first.');
     }
 
-    final completer = Completer<String>();
-    final buffer = StringBuffer();
-
     // Cancel any existing subscription
     await _tokenSubscription?.cancel();
 
-    _tokenSubscription = fllama.onTokenStream?.listen((data) {
-      if (data['function'] == 'completion') {
-        final result = data['result'];
-        if (result is Map) {
-          final token = result['token'] as String?;
-          final isDone = result['done'] as bool? ?? false;
-
-          if (token != null) {
-            buffer.write(token);
-            onToken?.call(token);
-          }
-
-          if (isDone && !completer.isCompleted) {
-            completer.complete(buffer.toString());
+    // Stream tokens in realtime for incremental display
+    if (onToken != null) {
+      _tokenSubscription = fllama.onTokenStream?.listen((data) {
+        if (data['function'] == 'completion') {
+          final result = data['result'];
+          if (result is Map) {
+            final token = result['token'] as String?;
+            if (token != null) {
+              onToken(token);
+            }
           }
         }
-      }
-    });
+      });
+    }
 
-    // Start completion
-    await fllama.completion(
+    // Start completion — this awaits until the native completion finishes
+    final result = await fllama.completion(
       _contextId!,
       prompt: prompt,
       nPredict: maxTokens,
       temperature: temperature,
       stop: stopSequences,
-      emitRealtimeCompletion: true,
+      emitRealtimeCompletion: onToken != null,
     );
 
-    return completer.future;
+    await _tokenSubscription?.cancel();
+    _tokenSubscription = null;
+
+    // Return the full generated text from the native result
+    return (result?['text'] as String?) ?? '';
   }
 
   /// Generates a chat completion from a list of messages.
@@ -160,19 +157,20 @@ class LocalFllamaClient {
       throw StateError('Model not loaded. Call loadModel() first.');
     }
 
-    // Format messages into prompt using model's chat template
-    final formattedPrompt = await fllama.getFormattedChat(
+    // Use fllama's native getFormattedChat to apply the model's chat template.
+    // This properly handles special tokens (e.g. <|im_start|>, <|im_end|>).
+    final prompt = await fllama.getFormattedChat(
       _contextId!,
       messages: messages,
       chatTemplate: chatTemplate,
     );
 
-    if (formattedPrompt == null) {
+    if (prompt == null || prompt.isEmpty) {
       throw StateError('Failed to format chat messages.');
     }
 
     return complete(
-      formattedPrompt,
+      prompt,
       onToken: onToken,
       maxTokens: maxTokens,
       temperature: temperature,

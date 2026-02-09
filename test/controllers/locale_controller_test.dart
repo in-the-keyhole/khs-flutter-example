@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:khs_flutter_example/src/clients/local_preferences_client.dart';
 import 'package:khs_flutter_example/src/controllers/locale_controller.dart';
-import 'package:khs_flutter_example/src/services/preferences_service.dart';
+import 'package:khs_flutter_example/src/services/user_preferences_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   group('LocaleController', () {
     late LocaleController controller;
-    late PreferencesService service;
+    late UserPreferencesService service;
     late LocalPreferencesClient client;
 
     setUp(() async {
       SharedPreferences.setMockInitialValues({});
       client = await LocalPreferencesClient.create();
-      service = PreferencesService(client);
+      service = UserPreferencesService(client);
       await service.init();
       controller = LocaleController(service);
     });
@@ -207,7 +207,7 @@ void main() {
         await client.clear();
 
         // Create fresh service and controller
-        final newService = PreferencesService(client);
+        final newService = UserPreferencesService(client);
         await newService.init();
         final newController = LocaleController(newService);
 

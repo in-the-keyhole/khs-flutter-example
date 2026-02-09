@@ -1,0 +1,8 @@
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/android/.cxx/Debug/56314o5c/arm64-v8a/CMakeFiles/fllama.dir
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/android/.cxx/Debug/56314o5c/arm64-v8a/CMakeFiles/fllama_v8_4_fp16_dotprod_i8mm.dir
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/android/.cxx/Debug/56314o5c/arm64-v8a/CMakeFiles/fllama_v8_4_fp16_dotprod.dir
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/android/.cxx/Debug/56314o5c/arm64-v8a/CMakeFiles/fllama_v8_2_fp16_dotprod.dir
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/android/.cxx/Debug/56314o5c/arm64-v8a/CMakeFiles/fllama_v8_2_fp16.dir
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/android/.cxx/Debug/56314o5c/arm64-v8a/CMakeFiles/fllama_v8.dir
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/android/.cxx/Debug/56314o5c/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/bpalmer/.pub-cache/hosted/pub.dev/fllama-0.0.1/android/.cxx/Debug/56314o5c/arm64-v8a/CMakeFiles/rebuild_cache.dir

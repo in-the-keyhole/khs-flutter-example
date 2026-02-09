@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:khs_flutter_example/src/clients/local_preferences_client.dart';
-import 'package:khs_flutter_example/src/services/preferences_service.dart';
+import 'package:khs_flutter_example/src/services/user_preferences_service.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  group('PreferencesService', () {
-    late PreferencesService service;
+  group('UserPreferencesService', () {
+    late UserPreferencesService service;
     late LocalPreferencesClient client;
 
     setUp(() async {
       // Clear any existing preferences
       SharedPreferences.setMockInitialValues({});
       client = await LocalPreferencesClient.create();
-      service = PreferencesService(client);
+      service = UserPreferencesService(client);
     });
 
     group('Initialization', () {
@@ -157,7 +157,7 @@ void main() {
       test('should work with pre-initialized client', () async {
         final prefs = await SharedPreferences.getInstance();
         final customClient = LocalPreferencesClient(prefs: prefs);
-        final customService = PreferencesService(customClient);
+        final customService = UserPreferencesService(customClient);
 
         await customService.init();
         await customService.updateThemeMode(ThemeMode.dark);
@@ -166,7 +166,7 @@ void main() {
 
       test('should work with lazy-loaded client', () async {
         final lazyClient = LocalPreferencesClient();
-        final lazyService = PreferencesService(lazyClient);
+        final lazyService = UserPreferencesService(lazyClient);
 
         await lazyService.init();
         await lazyService.updateThemeMode(ThemeMode.light);
@@ -178,7 +178,7 @@ void main() {
         await service.updateThemeMode(ThemeMode.dark);
 
         // Create another service with the same client
-        final service2 = PreferencesService(client);
+        final service2 = UserPreferencesService(client);
         await service2.init();
 
         // Should read same value from storage
@@ -232,7 +232,7 @@ void main() {
         await client.clear();
 
         // Create new service and init
-        final newService = PreferencesService(client);
+        final newService = UserPreferencesService(client);
         await newService.init();
         expect(newService.themeMode, equals(ThemeMode.system));
       });
@@ -241,7 +241,7 @@ void main() {
         await service.updateThemeMode(ThemeMode.light);
 
         // Create new service with same client and init
-        final newService = PreferencesService(client);
+        final newService = UserPreferencesService(client);
         await newService.init();
 
         expect(newService.themeMode, equals(ThemeMode.light));
@@ -297,10 +297,143 @@ void main() {
       test('should load locale from storage on init', () async {
         await client.setString('locale', 'es');
 
-        final newService = PreferencesService(client);
+        final newService = UserPreferencesService(client);
         await newService.init();
 
         expect(newService.locale, equals(const Locale('es')));
+      });
+    });
+
+    group('Selected Model', () {
+      setUp(() async {
+        await service.init();
+      });
+
+      test('should return null model path and name by default', () {
+        expect(service.selectedModelPath, isNull);
+        expect(service.selectedModelName, isNull);
+      });
+
+      test('should update and retrieve selected model', () async {
+        await service.updateSelectedModel('/path/to/model.gguf', 'Test Model');
+        expect(service.selectedModelPath, equals('/path/to/model.gguf'));
+        expect(service.selectedModelName, equals('Test Model'));
+      });
+
+      test('should persist model to storage', () async {
+        await service.updateSelectedModel('/path/to/model.gguf', 'Test Model');
+        final storedPath = await client.getString('selected_model_path');
+        final storedName = await client.getString('selected_model_name');
+        expect(storedPath, equals('/path/to/model.gguf'));
+        expect(storedName, equals('Test Model'));
+      });
+
+      test('should clear selected model', () async {
+        await service.updateSelectedModel('/path/to/model.gguf', 'Test Model');
+        expect(service.selectedModelPath, isNotNull);
+
+        await service.clearSelectedModel();
+        expect(service.selectedModelPath, isNull);
+        expect(service.selectedModelName, isNull);
+        expect(await client.getString('selected_model_path'), isNull);
+        expect(await client.getString('selected_model_name'), isNull);
+      });
+
+      test('should load model from storage on init', () async {
+        await client.setString('selected_model_path', '/saved/model.gguf');
+        await client.setString('selected_model_name', 'Saved Model');
+
+        final newService = UserPreferencesService(client);
+        await newService.init();
+
+        expect(newService.selectedModelPath, equals('/saved/model.gguf'));
+        expect(newService.selectedModelName, equals('Saved Model'));
+      });
+
+      test('should overwrite existing model preference', () async {
+        await service.updateSelectedModel('/first/model.gguf', 'First');
+        await service.updateSelectedModel('/second/model.gguf', 'Second');
+
+        expect(service.selectedModelPath, equals('/second/model.gguf'));
+        expect(service.selectedModelName, equals('Second'));
+      });
+    });
+
+    group('Context Size', () {
+      setUp(() async {
+        await service.init();
+      });
+
+      test('should return default context size when no preference is set', () {
+        expect(service.contextSize, equals(UserPreferencesService.defaultContextSize));
+        expect(service.contextSize, equals(4096));
+      });
+
+      test('should update and retrieve context size', () async {
+        await service.updateContextSize(8192);
+        expect(service.contextSize, equals(8192));
+      });
+
+      test('should persist context size to storage', () async {
+        await service.updateContextSize(2048);
+        final stored = await client.getInt('context_size');
+        expect(stored, equals(2048));
+      });
+
+      test('should load context size from storage on init', () async {
+        await client.setInt('context_size', 1024);
+
+        final newService = UserPreferencesService(client);
+        await newService.init();
+
+        expect(newService.contextSize, equals(1024));
+      });
+
+      test('should overwrite existing context size', () async {
+        await service.updateContextSize(512);
+        expect(service.contextSize, equals(512));
+
+        await service.updateContextSize(8192);
+        expect(service.contextSize, equals(8192));
+      });
+    });
+
+    group('System Prompt', () {
+      setUp(() async {
+        await service.init();
+      });
+
+      test('should return default system prompt when no preference is set', () {
+        expect(service.systemPrompt, equals(UserPreferencesService.defaultSystemPrompt));
+        expect(service.systemPrompt, equals('You are a helpful assistant.'));
+      });
+
+      test('should update and retrieve system prompt', () async {
+        await service.updateSystemPrompt('You are a pirate.');
+        expect(service.systemPrompt, equals('You are a pirate.'));
+      });
+
+      test('should persist system prompt to storage', () async {
+        await service.updateSystemPrompt('Custom prompt');
+        final stored = await client.getString('system_prompt');
+        expect(stored, equals('Custom prompt'));
+      });
+
+      test('should load system prompt from storage on init', () async {
+        await client.setString('system_prompt', 'Saved prompt');
+
+        final newService = UserPreferencesService(client);
+        await newService.init();
+
+        expect(newService.systemPrompt, equals('Saved prompt'));
+      });
+
+      test('should overwrite existing system prompt', () async {
+        await service.updateSystemPrompt('First prompt');
+        expect(service.systemPrompt, equals('First prompt'));
+
+        await service.updateSystemPrompt('Second prompt');
+        expect(service.systemPrompt, equals('Second prompt'));
       });
     });
   });

@@ -3,7 +3,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:khs_flutter_example/src/components/molecules/model_status.dart';
 import 'package:khs_flutter_example/src/components/organisms/chat_message_list.dart';
 import 'package:khs_flutter_example/src/controllers/llm_controller.dart';
-import 'package:khs_flutter_example/src/services/llm_service.dart';
+import 'package:khs_flutter_example/src/services/llm_completion_service.dart';
+import 'package:khs_flutter_example/src/services/llm_models_service.dart';
 import 'package:khs_flutter_example/src/clients/local_fllama_client.dart';
 
 /// Mock fllama client for testing that extends the real class
@@ -74,6 +75,31 @@ class MockFllamaClient extends LocalFllamaClient {
   }
 
   @override
+  Future<String> chat(
+    List<RoleContent> messages, {
+    void Function(String token)? onToken,
+    int maxTokens = 256,
+    double temperature = 0.7,
+    String? chatTemplate,
+  }) async {
+    if (shouldFailComplete) {
+      throw Exception('Mock completion error');
+    }
+
+    if (completeDelayMs > 0) {
+      await Future.delayed(Duration(milliseconds: completeDelayMs));
+    }
+
+    // Simulate token streaming
+    final words = mockResponse.split(' ');
+    for (final word in words) {
+      onToken?.call('$word ');
+    }
+
+    return mockResponse;
+  }
+
+  @override
   Future<void> stopCompletion() async {
     // No-op for mock
   }
@@ -88,13 +114,15 @@ class MockFllamaClient extends LocalFllamaClient {
 void main() {
   group('LlmController', () {
     late LlmController controller;
-    late LlmService service;
+    late LlmCompletionService completionService;
+    late LlmModelsService modelsService;
     late MockFllamaClient mockClient;
 
     setUp(() {
       mockClient = MockFllamaClient();
-      service = LlmService(mockClient);
-      controller = LlmController(service);
+      completionService = LlmCompletionService(mockClient);
+      modelsService = LlmModelsService(mockClient);
+      controller = LlmController(completionService, modelsService);
     });
 
     group('Initialization', () {

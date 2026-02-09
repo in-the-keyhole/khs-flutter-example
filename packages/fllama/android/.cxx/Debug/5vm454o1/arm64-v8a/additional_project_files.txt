@@ -1,0 +1,8 @@
+/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/ios/Cpp/json.hpp
+/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/ios/Cpp/fllama.hpp
+/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/ios/Cpp/stb_image.h
+/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/ios/Cpp/base64.hpp
+/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/ios/Cpp/clip.h
+/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/ios/Cpp/llava.h
+/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/ios/Cpp/fllava.hpp
+/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/android/src/main/utils.h

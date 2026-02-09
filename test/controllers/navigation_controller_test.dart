@@ -16,7 +16,7 @@ void main() {
         expect(controller, isA<ChangeNotifier>());
       });
 
-      test('should start with index 0', () {
+      test('should start with index 0 (AI Chat)', () {
         expect(controller.currentIndex, equals(0));
       });
     });
@@ -27,13 +27,8 @@ void main() {
         expect(controller.currentIndex, equals(1));
       });
 
-      test('should navigate to index 2', () {
-        controller.navigateTo(2);
-        expect(controller.currentIndex, equals(2));
-      });
-
       test('should navigate back to index 0', () {
-        controller.navigateTo(2);
+        controller.navigateTo(1);
         controller.navigateTo(0);
         expect(controller.currentIndex, equals(0));
       });
@@ -59,7 +54,7 @@ void main() {
         controller.navigateTo(1);
         expect(notificationCount, equals(1));
 
-        controller.navigateTo(2);
+        controller.navigateTo(0);
         expect(notificationCount, equals(2));
       });
     });
@@ -88,7 +83,7 @@ void main() {
         expect(callCount, equals(1));
 
         controller.removeListener(listener);
-        controller.navigateTo(2);
+        controller.navigateTo(0);
         expect(callCount, equals(1)); // Should not increment
       });
 
@@ -113,22 +108,22 @@ void main() {
     group('Edge Cases', () {
       test('should handle rapid sequential navigation', () {
         controller.navigateTo(1);
-        controller.navigateTo(2);
         controller.navigateTo(0);
         controller.navigateTo(1);
+        controller.navigateTo(0);
 
-        expect(controller.currentIndex, equals(1));
+        expect(controller.currentIndex, equals(0));
       });
 
       test('should maintain state after dispose', () {
-        controller.navigateTo(2);
+        controller.navigateTo(1);
         final index = controller.currentIndex;
         controller.dispose();
 
         // Create new controller
         final newController = NavigationController();
-        expect(newController.currentIndex, equals(0)); // Starts fresh
-        expect(index, equals(2)); // Old value preserved
+        expect(newController.currentIndex, equals(0)); // Starts fresh at AI Chat
+        expect(index, equals(1)); // Old value preserved
       });
     });
   });

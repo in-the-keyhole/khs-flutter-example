@@ -1,0 +1,4 @@
+/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/android/.cxx/Debug/5vm454o1/x86_64/CMakeFiles/fllama.dir
+/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/android/.cxx/Debug/5vm454o1/x86_64/CMakeFiles/fllama_x86_64.dir
+/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/android/.cxx/Debug/5vm454o1/x86_64/CMakeFiles/edit_cache.dir
+/Users/bpalmer/Projects/Keyhole/khs-flutter-example/packages/fllama/android/.cxx/Debug/5vm454o1/x86_64/CMakeFiles/rebuild_cache.dir

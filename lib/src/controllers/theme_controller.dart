@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-import '../services/preferences_service.dart';
+import '../services/user_preferences_service.dart';
 
 /// A class that many Widgets can interact with to read user settings, update
 /// user settings, or listen to user settings changes.
 ///
 /// Controllers glue Data Services to Flutter Widgets. The ThemeController
-/// uses the PreferencesService to store and retrieve user settings.
+/// uses the UserPreferencesService to store and retrieve user settings.
 class ThemeController with ChangeNotifier {
   ThemeController(this._preferencesService);
 
-  final PreferencesService _preferencesService;
+  final UserPreferencesService _preferencesService;
 
   /// The current theme mode setting.
   ThemeMode get mode => _preferencesService.themeMode;

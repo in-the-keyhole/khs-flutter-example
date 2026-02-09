@@ -1,5 +1,4 @@
 import '../../clients/download_llm_client.dart';
-import '../../clients/local_database_client.dart';
 import '../../clients/local_filesystem_client.dart';
 import '../../clients/local_fllama_client.dart';
 import '../../clients/local_preferences_client.dart';
@@ -13,12 +12,10 @@ class ClientInterface {
     required this.fllama,
     required this.filesystem,
     required this.modelDownload,
-    required this.database,
   });
 
   final LocalPreferencesClient preferences;
   final LocalFllamaClient fllama;
   final LocalFilesystemClient filesystem;
   final DownloadLlmClient modelDownload;
-  final LocalDatabaseClient database;
 }

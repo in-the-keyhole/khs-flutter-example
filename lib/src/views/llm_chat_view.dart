@@ -7,6 +7,7 @@ import '../components/molecules/model_status.dart';
 import '../components/organisms/chat_message_list.dart';
 import '../components/templates/bottom_navigation.dart';
 import '../controllers/llm_controller.dart';
+import '../controllers/model_download_controller.dart';
 import '../localization/app_localizations.dart';
 import '../models/interfaces/control_interface.dart';
 import 'llm_models_view.dart';
@@ -17,6 +18,7 @@ class LlmChatView extends StatefulWidget {
     super.key,
     required this.controls,
     required this.llmController,
+    required this.modelDownloadController,
     required this.filesystemClient,
     required this.modelDownloadClient,
   });
@@ -25,6 +27,7 @@ class LlmChatView extends StatefulWidget {
 
   final ControlInterface controls;
   final LlmController llmController;
+  final ModelDownloadController modelDownloadController;
   final LocalFilesystemClient filesystemClient;
   final DownloadLlmClient modelDownloadClient;
 
@@ -71,9 +74,185 @@ class _LlmChatViewState extends State<LlmChatView> {
           llmController: widget.llmController,
           filesystemClient: widget.filesystemClient,
           modelDownloadClient: widget.modelDownloadClient,
+          modelDownloadController: widget.modelDownloadController,
         ),
       ),
     );
+  }
+
+  void _showRenameDialog(String id, String currentTitle) {
+    final localizations = AppLocalizations.of(context)!;
+    final renameController = TextEditingController(text: currentTitle);
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(localizations.renameDialogTitle),
+        content: TextField(
+          controller: renameController,
+          autofocus: true,
+          onSubmitted: (_) {
+            final newTitle = renameController.text.trim();
+            if (newTitle.isNotEmpty) {
+              widget.llmController.renameConversation(id, newTitle);
+            }
+            Navigator.of(context).pop();
+          },
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(localizations.cancel),
+          ),
+          TextButton(
+            onPressed: () {
+              final newTitle = renameController.text.trim();
+              if (newTitle.isNotEmpty) {
+                widget.llmController.renameConversation(id, newTitle);
+              }
+              Navigator.of(context).pop();
+            },
+            child: Text(localizations.save),
+          ),
+        ],
+      ),
+    ).then((_) => renameController.dispose());
+  }
+
+  void _showDeleteDialog(String id) {
+    final localizations = AppLocalizations.of(context)!;
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(localizations.deleteConversation),
+        content: Text(localizations.deleteConversationConfirm),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: Text(localizations.cancel),
+          ),
+          TextButton(
+            onPressed: () {
+              widget.llmController.deleteConversation(id);
+              Navigator.of(context).pop();
+            },
+            child: Text(localizations.deleteConversation),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDrawer() {
+    final localizations = AppLocalizations.of(context)!;
+    final conversations = widget.llmController.conversations;
+    final currentId = widget.llmController.currentConversationId;
+
+    return Drawer(
+      child: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 8, 8),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      localizations.conversationsTitle,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                  ),
+                  FilledButton.tonalIcon(
+                    onPressed: () {
+                      widget.llmController.newConversation();
+                      Navigator.of(context).pop();
+                    },
+                    icon: const Icon(Icons.add),
+                    label: Text(localizations.newChat),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(),
+            Expanded(
+              child: conversations.isEmpty
+                  ? Center(
+                      child: Text(
+                        localizations.llmStartChatting,
+                        style: TextStyle(
+                          color:
+                              Theme.of(context).colorScheme.onSurfaceVariant,
+                        ),
+                      ),
+                    )
+                  : ListView.builder(
+                      itemCount: conversations.length,
+                      itemBuilder: (context, index) {
+                        final conversation = conversations[index];
+                        final isActive = conversation.id == currentId;
+
+                        return ListTile(
+                          selected: isActive,
+                          title: Text(
+                            conversation.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          subtitle: Text(
+                            _formatTimestamp(conversation.updatedAt),
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                          onTap: () {
+                            widget.llmController
+                                .switchConversation(conversation.id);
+                            Navigator.of(context).pop();
+                            _scrollToBottom();
+                          },
+                          trailing: PopupMenuButton<String>(
+                            onSelected: (value) {
+                              switch (value) {
+                                case 'rename':
+                                  _showRenameDialog(
+                                      conversation.id, conversation.title);
+                                  break;
+                                case 'delete':
+                                  _showDeleteDialog(conversation.id);
+                                  break;
+                              }
+                            },
+                            itemBuilder: (context) => [
+                              PopupMenuItem(
+                                value: 'rename',
+                                child:
+                                    Text(localizations.renameConversation),
+                              ),
+                              PopupMenuItem(
+                                value: 'delete',
+                                child:
+                                    Text(localizations.deleteConversation),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  String _formatTimestamp(DateTime dateTime) {
+    final now = DateTime.now();
+    final diff = now.difference(dateTime);
+
+    if (diff.inMinutes < 1) return 'Just now';
+    if (diff.inHours < 1) return '${diff.inMinutes}m ago';
+    if (diff.inDays < 1) return '${diff.inHours}h ago';
+    if (diff.inDays < 7) return '${diff.inDays}d ago';
+    return '${dateTime.month}/${dateTime.day}/${dateTime.year}';
   }
 
   @override
@@ -85,6 +264,7 @@ class _LlmChatViewState extends State<LlmChatView> {
       label: 'Page',
       child: Scaffold(
         key: const ValueKey('view.llmChat'),
+        drawer: _buildDrawer(),
         appBar: AppBar(
           key: const ValueKey('view.llmChat.appBar'),
           title: Text(localizations.llmChatTitle),
@@ -98,8 +278,8 @@ class _LlmChatViewState extends State<LlmChatView> {
             PopupMenuButton<String>(
               onSelected: (value) {
                 switch (value) {
-                  case 'clear':
-                    widget.llmController.clearMessages();
+                  case 'new':
+                    widget.llmController.newConversation();
                     break;
                   case 'unload':
                     widget.llmController.unloadModel();
@@ -108,8 +288,8 @@ class _LlmChatViewState extends State<LlmChatView> {
               },
               itemBuilder: (context) => [
                 PopupMenuItem(
-                  value: 'clear',
-                  child: Text(localizations.llmClearChat),
+                  value: 'new',
+                  child: Text(localizations.newChat),
                 ),
                 if (widget.llmController.isReady)
                   PopupMenuItem(

@@ -104,18 +104,6 @@ abstract class AppLocalizations {
   /// **'khs_flutter_example'**
   String get appTitle;
 
-  /// Title for the home page
-  ///
-  /// In en, this message translates to:
-  /// **'Home'**
-  String get homeTitle;
-
-  /// Greeting message displayed on the home page
-  ///
-  /// In en, this message translates to:
-  /// **'Hello World!'**
-  String get homeGreeting;
-
   /// Title for the settings page
   ///
   /// In en, this message translates to:
@@ -145,12 +133,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dark Theme'**
   String get themeDark;
-
-  /// Label for home navigation item
-  ///
-  /// In en, this message translates to:
-  /// **'Home'**
-  String get navHome;
 
   /// Label for settings navigation item
   ///
@@ -319,6 +301,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select a .gguf model file from your device'**
   String get llmPickFromDeviceSubtitle;
+
+  /// Heading for the model settings section
+  ///
+  /// In en, this message translates to:
+  /// **'Model'**
+  String get modelHeading;
+
+  /// Button to open model download screen
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Models'**
+  String get modelManage;
+
+  /// Label for no model selected
+  ///
+  /// In en, this message translates to:
+  /// **'None'**
+  String get modelNone;
+
+  /// Heading for the context size settings section
+  ///
+  /// In en, this message translates to:
+  /// **'Context Size'**
+  String get contextSizeHeading;
+
+  /// Heading for the system prompt settings section
+  ///
+  /// In en, this message translates to:
+  /// **'System Prompt'**
+  String get systemPromptHeading;
+
+  /// Hint text for the system prompt input field
+  ///
+  /// In en, this message translates to:
+  /// **'Enter system prompt...'**
+  String get systemPromptHint;
+
+  /// Title for the conversations drawer
+  ///
+  /// In en, this message translates to:
+  /// **'Conversations'**
+  String get conversationsTitle;
+
+  /// Button to start a new conversation
+  ///
+  /// In en, this message translates to:
+  /// **'New Chat'**
+  String get newChat;
+
+  /// Menu item to rename a conversation
+  ///
+  /// In en, this message translates to:
+  /// **'Rename'**
+  String get renameConversation;
+
+  /// Menu item to delete a conversation
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get deleteConversation;
+
+  /// Confirmation text for deleting a conversation
+  ///
+  /// In en, this message translates to:
+  /// **'Delete this conversation?'**
+  String get deleteConversationConfirm;
+
+  /// Title for the rename conversation dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Rename Conversation'**
+  String get renameDialogTitle;
+
+  /// Generic save button label
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
 }
 
 class _AppLocalizationsDelegate
