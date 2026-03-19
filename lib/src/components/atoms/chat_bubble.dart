@@ -23,7 +23,7 @@ class ChatBubble extends StatelessWidget {
       identifier: semanticsId,
       label: isUser ? 'User message' : 'Assistant message',
       child: Align(
-        key: semanticsId != null ? ValueKey(semanticsId) : null,
+        key: semanticsId != null ? ValueKey<String>(semanticsId!) : null,
         alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
         child: Container(
           constraints: BoxConstraints(

@@ -30,7 +30,7 @@ void main() {
     testWidgets('should create models directory', (tester) async {
       final dir = await downloadClient.getModelsDirectory();
 
-      expect(await dir.exists(), isTrue);
+      expect(dir.existsSync(), isTrue);
       expect(dir.path, contains('models'));
     });
 
@@ -64,7 +64,7 @@ void main() {
 
       // Verify file exists
       final file = File(path!);
-      expect(await file.exists(), isTrue);
+      expect(file.existsSync(), isTrue);
 
       // Verify file has content
       final size = await file.length();
@@ -101,7 +101,7 @@ void main() {
       // Clean up
       final path = await downloadClient.getModelPath(testFilename);
       final file = File(path);
-      if (await file.exists()) {
+      if (file.existsSync()) {
         await file.delete();
       }
     });
@@ -129,13 +129,13 @@ void main() {
       // Clean up any partial file
       final path = await downloadClient.getModelPath(testFilename);
       final file = File(path);
-      if (await file.exists()) {
+      if (file.existsSync()) {
         await file.delete();
       }
 
       // Clean up .download file
       final partialFile = File('$path.download');
-      if (await partialFile.exists()) {
+      if (partialFile.existsSync()) {
         await partialFile.delete();
       }
     });
@@ -245,11 +245,11 @@ void main() {
       await downloadClient.cleanupPartialDownloads();
 
       // Verify partials are deleted
-      expect(await partial1.exists(), isFalse);
-      expect(await partial2.exists(), isFalse);
+      expect(partial1.existsSync(), isFalse);
+      expect(partial2.existsSync(), isFalse);
 
       // Verify complete file is preserved
-      expect(await complete.exists(), isTrue);
+      expect(complete.existsSync(), isTrue);
 
       // Clean up
       await complete.delete();

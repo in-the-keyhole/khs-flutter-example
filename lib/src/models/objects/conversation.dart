@@ -10,23 +10,42 @@ class Conversation {
     required this.updatedAt,
   });
 
-  final String id;
-  String title;
-  final List<ChatMessage> messages;
-  final DateTime createdAt;
-  DateTime updatedAt;
-
   /// Creates a new conversation with a generated ID.
   factory Conversation.create({String title = 'New Conversation'}) {
     final now = DateTime.now();
     return Conversation(
       id: '${now.millisecondsSinceEpoch}_${now.microsecond}',
       title: title,
-      messages: [],
+      messages: <ChatMessage>[],
       createdAt: now,
       updatedAt: now,
     );
   }
+
+  factory Conversation.fromJson(Map<String, dynamic> json) {
+    final messagesList = (json['messages'] as List?)
+            ?.map((m) => ChatMessage(
+                  content: m['content'] as String,
+                  isUser: m['isUser'] as bool,
+                  id: m['id'] as String?,
+                ))
+            .toList() ??
+        <ChatMessage>[];
+
+    return Conversation(
+      id: json['id'] as String,
+      title: json['title'] as String,
+      messages: messagesList,
+      createdAt: DateTime.fromMicrosecondsSinceEpoch(json['createdAt'] as int),
+      updatedAt: DateTime.fromMicrosecondsSinceEpoch(json['updatedAt'] as int),
+    );
+  }
+
+  final String id;
+  String title;
+  final List<ChatMessage> messages;
+  final DateTime createdAt;
+  DateTime updatedAt;
 
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -38,26 +57,7 @@ class Conversation {
                   'id': m.id,
                 })
             .toList(),
-        'createdAt': createdAt.millisecondsSinceEpoch,
-        'updatedAt': updatedAt.millisecondsSinceEpoch,
+        'createdAt': createdAt.microsecondsSinceEpoch,
+        'updatedAt': updatedAt.microsecondsSinceEpoch,
       };
-
-  factory Conversation.fromJson(Map<String, dynamic> json) {
-    final messagesList = (json['messages'] as List?)
-            ?.map((m) => ChatMessage(
-                  content: m['content'] as String,
-                  isUser: m['isUser'] as bool,
-                  id: m['id'] as String?,
-                ))
-            .toList() ??
-        [];
-
-    return Conversation(
-      id: json['id'] as String,
-      title: json['title'] as String,
-      messages: messagesList,
-      createdAt: DateTime.fromMillisecondsSinceEpoch(json['createdAt'] as int),
-      updatedAt: DateTime.fromMillisecondsSinceEpoch(json['updatedAt'] as int),
-    );
-  }
 }

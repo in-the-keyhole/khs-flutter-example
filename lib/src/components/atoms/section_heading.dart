@@ -21,7 +21,7 @@ class SectionHeading extends StatelessWidget {
       header: true,
       child: Text(
         text,
-        key: semanticsId != null ? ValueKey(semanticsId) : null,
+        key: semanticsId != null ? ValueKey<String>(semanticsId!) : null,
         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       ),
     );

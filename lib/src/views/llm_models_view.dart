@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../clients/local_filesystem_client.dart';
 import '../clients/download_llm_client.dart';
+import '../clients/local_filesystem_client.dart';
 import '../components/organisms/model_browser.dart';
 import '../controllers/llm_controller.dart';
 import '../controllers/model_download_controller.dart';

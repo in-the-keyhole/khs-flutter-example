@@ -127,6 +127,31 @@ class ModelRegistry {
       quantization: 'Q4_K_M',
       parameters: '3B',
     ),
+
+    // Qwen3 4B - Alibaba's latest with native tool calling
+    ModelInfo(
+      id: 'qwen3-4b-q4',
+      name: 'Qwen3 4B',
+      description: 'Native tool/function calling support. Best-in-class for its size.',
+      sizeBytes: 2500000000, // ~2.5 GB
+      downloadUrl:
+          'https://huggingface.co/Qwen/Qwen3-4B-GGUF/resolve/main/Qwen3-4B-Q4_K_M.gguf',
+      quantization: 'Q4_K_M',
+      parameters: '4B',
+      recommended: true,
+    ),
+
+    // LFM2.5 Nova 1.2B - Purpose-built for function calling
+    ModelInfo(
+      id: 'lfm25-nova-1.2b-fc-q4',
+      name: 'LFM2.5 Nova 1.2B Function Calling',
+      description: 'Purpose-built for tool calling. 97% valid JSON output reliability.',
+      sizeBytes: 731000000, // ~731 MB
+      downloadUrl:
+          'https://huggingface.co/mradermacher/LFM2.5-1.2B-Nova-Function-Calling-GGUF/resolve/main/LFM2.5-1.2B-Nova-Function-Calling.Q4_K_M.gguf',
+      quantization: 'Q4_K_M',
+      parameters: '1.2B',
+    ),
   ];
 
   /// Get recommended models for mobile devices.
@@ -135,11 +160,10 @@ class ModelRegistry {
 
   /// Get a model by its ID.
   static ModelInfo? getById(String id) {
-    try {
-      return models.firstWhere((m) => m.id == id);
-    } catch (_) {
-      return null;
-    }
+    return models.cast<ModelInfo?>().firstWhere(
+          (m) => m?.id == id,
+          orElse: () => null,
+        );
   }
 
   /// Get models sorted by size (smallest first).

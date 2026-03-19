@@ -1,20 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../models/objects/chat_message.dart';
 import '../atoms/chat_bubble.dart';
 import '../atoms/typing_indicator.dart';
 
-/// A chat message data class.
-class ChatMessage {
-  const ChatMessage({
-    required this.content,
-    required this.isUser,
-    this.id,
-  });
-
-  final String content;
-  final bool isUser;
-  final String? id;
-}
+export '../../models/objects/chat_message.dart';
 
 /// A scrollable list of chat messages organism.
 ///
@@ -39,7 +29,7 @@ class ChatMessageList extends StatelessWidget {
       identifier: semanticsId,
       label: 'Chat messages',
       child: ListView.builder(
-        key: semanticsId != null ? ValueKey(semanticsId) : null,
+        key: semanticsId != null ? ValueKey<String>(semanticsId!) : null,
         controller: scrollController,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         itemCount: messages.length + (isTyping ? 1 : 0),

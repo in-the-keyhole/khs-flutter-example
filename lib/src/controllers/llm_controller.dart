@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
 
-import '../services/conversation_storage_service.dart';
 import '../clients/local_fllama_client.dart';
 import '../components/molecules/model_status.dart';
-import '../components/organisms/chat_message_list.dart';
+import '../models/objects/chat_message.dart';
 import '../models/objects/conversation.dart';
+import '../services/conversation_storage_service.dart';
 import '../services/llm_completion_service.dart';
 import '../services/llm_models_service.dart';
 import '../services/user_preferences_service.dart';
@@ -71,11 +71,9 @@ class LlmController with ChangeNotifier {
   /// The current active conversation, if any.
   Conversation? get currentConversation {
     if (_currentConversationId == null) return null;
-    try {
-      return _conversations.firstWhere((c) => c.id == _currentConversationId);
-    } catch (_) {
-      return null;
-    }
+    return _conversations
+        .cast<Conversation?>()
+        .firstWhere((c) => c?.id == _currentConversationId, orElse: () => null);
   }
 
   // ============ Conversation Management ============
@@ -207,7 +205,7 @@ class LlmController with ChangeNotifier {
         _modelState = ModelState.error;
         _errorMessage = 'Failed to load model';
       }
-    } catch (e) {
+    } on Exception catch (e) {
       _modelState = ModelState.error;
       _errorMessage = e.toString();
     }
@@ -274,7 +272,7 @@ class LlmController with ChangeNotifier {
         isUser: false,
         id: 'assistant_${_messages.length}',
       ));
-    } catch (e) {
+    } on Exception catch (e) {
       // Add error message
       _messages.add(ChatMessage(
         content: 'Error: ${e.toString()}',

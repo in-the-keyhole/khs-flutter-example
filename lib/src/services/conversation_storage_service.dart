@@ -24,16 +24,16 @@ class ConversationStorageService {
   Future<List<Conversation>> loadAll() async {
     try {
       final path = await _getFilePath();
-      if (!await File(path).exists()) return [];
+      if (!File(path).existsSync()) return [];
 
-      final contents = await File(path).readAsString();
+      final contents = File(path).readAsStringSync();
       if (contents.isEmpty) return [];
 
       final list = jsonDecode(contents) as List;
       return list
           .map((item) => Conversation.fromJson(item as Map<String, dynamic>))
           .toList();
-    } catch (_) {
+    } on Exception catch (_) {
       return [];
     }
   }
@@ -49,7 +49,7 @@ class ConversationStorageService {
   Future<void> deleteFile() async {
     final path = await _getFilePath();
     final file = File(path);
-    if (await file.exists()) {
+    if (file.existsSync()) {
       await file.delete();
     }
   }

@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'controllers/llm_controller.dart';
-import 'controllers/model_download_controller.dart';
 import 'controllers/locale_controller.dart';
+import 'controllers/model_download_controller.dart';
 import 'controllers/theme_controller.dart';
 import 'localization/app_localizations.dart';
 import 'models/interfaces/client_interface.dart';
 import 'models/interfaces/control_interface.dart';
+import 'router.dart';
 import 'services/conversation_storage_service.dart';
 import 'services/llm_completion_service.dart';
 import 'services/llm_models_service.dart';
 import 'services/user_preferences_service.dart';
-import 'router.dart';
 
 /// The Widget that configures the application.
 class MyApp extends StatefulWidget {

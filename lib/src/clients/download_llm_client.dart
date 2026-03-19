@@ -43,7 +43,7 @@ class DownloadLlmClient {
       final tempFile = File(tempPath);
 
       // Check if file already exists
-      if (await file.exists()) {
+      if (file.existsSync()) {
         debugPrint(
             '[ModelDownloadClient] File already exists, returning: $filePath');
         return filePath;
@@ -51,8 +51,8 @@ class DownloadLlmClient {
 
       // Check for partial download
       int startByte = 0;
-      if (await tempFile.exists()) {
-        startByte = await tempFile.length();
+      if (tempFile.existsSync()) {
+        startByte = tempFile.lengthSync();
         debugPrint('[ModelDownloadClient] Resuming from byte: $startByte');
       }
 
@@ -87,7 +87,7 @@ class DownloadLlmClient {
       } else {
         totalBytes = response.contentLength ?? 0;
         startByte = 0; // Server doesn't support range, start over
-        if (await tempFile.exists()) {
+        if (tempFile.existsSync()) {
           await tempFile.delete();
         }
       }
@@ -132,8 +132,8 @@ class DownloadLlmClient {
     final appDir = await getApplicationDocumentsDirectory();
     final modelsDir = Directory('${appDir.path}/models');
 
-    if (!await modelsDir.exists()) {
-      await modelsDir.create(recursive: true);
+    if (!modelsDir.existsSync()) {
+      modelsDir.createSync(recursive: true);
     }
 
     return modelsDir;
@@ -143,7 +143,7 @@ class DownloadLlmClient {
   Future<List<File>> listDownloadedModels() async {
     final modelsDir = await getModelsDirectory();
 
-    if (!await modelsDir.exists()) {
+    if (!modelsDir.existsSync()) {
       return [];
     }
 
@@ -157,7 +157,7 @@ class DownloadLlmClient {
   /// Deletes a downloaded model file.
   Future<bool> deleteModel(String filePath) async {
     final file = File(filePath);
-    if (await file.exists()) {
+    if (file.existsSync()) {
       await file.delete();
       return true;
     }
@@ -167,7 +167,7 @@ class DownloadLlmClient {
   /// Gets the file size of a downloaded model.
   Future<int?> getModelSize(String filePath) async {
     final file = File(filePath);
-    if (await file.exists()) {
+    if (file.existsSync()) {
       return await file.length();
     }
     return null;
@@ -177,7 +177,7 @@ class DownloadLlmClient {
   Future<bool> modelExists(String filename) async {
     final modelsDir = await getModelsDirectory();
     final file = File('${modelsDir.path}/$filename');
-    return await file.exists();
+    return file.existsSync();
   }
 
   /// Gets the full path for a model filename.
@@ -189,7 +189,7 @@ class DownloadLlmClient {
   /// Cleans up incomplete downloads.
   Future<void> cleanupPartialDownloads() async {
     final modelsDir = await getModelsDirectory();
-    if (!await modelsDir.exists()) return;
+    if (!modelsDir.existsSync()) return;
 
     final files = await modelsDir.list().toList();
     for (final file in files) {

@@ -23,7 +23,7 @@ class Section extends StatelessWidget {
       identifier: semanticsId,
       label: 'Section: $heading',
       child: Column(
-        key: semanticsId != null ? ValueKey(semanticsId) : null,
+        key: semanticsId != null ? ValueKey<String>(semanticsId!) : null,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SectionHeading(

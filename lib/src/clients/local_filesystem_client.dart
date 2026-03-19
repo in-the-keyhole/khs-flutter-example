@@ -98,15 +98,15 @@ class LocalFilesystemClient {
   }
 
   /// Checks if a file exists at the given path.
-  Future<bool> fileExists(String path) async {
-    return await File(path).exists();
+  bool fileExists(String path) {
+    return File(path).existsSync();
   }
 
   /// Gets the file size in bytes.
-  Future<int?> getFileSize(String path) async {
+  int? getFileSize(String path) {
     final file = File(path);
-    if (await file.exists()) {
-      return await file.length();
+    if (file.existsSync()) {
+      return file.lengthSync();
     }
     return null;
   }

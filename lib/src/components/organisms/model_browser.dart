@@ -1,24 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../models/model_registry.dart';
+import '../../models/objects/model_browser_item.dart';
 
-/// Status of a model in the browser.
-enum ModelDownloadStatus { notDownloaded, downloading, downloaded }
-
-/// State for a model in the browser list.
-class ModelBrowserItem {
-  ModelBrowserItem({
-    required this.model,
-    this.status = ModelDownloadStatus.notDownloaded,
-    this.downloadProgress = 0.0,
-    this.localPath,
-  });
-
-  final ModelInfo model;
-  ModelDownloadStatus status;
-  double downloadProgress;
-  String? localPath;
-}
+export '../../models/objects/model_browser_item.dart';
 
 /// A browsable list of available models for download.
 ///
@@ -47,7 +32,7 @@ class ModelBrowser extends StatelessWidget {
       identifier: semanticsId,
       label: 'Model browser',
       child: ListView.builder(
-        key: semanticsId != null ? ValueKey(semanticsId) : null,
+        key: semanticsId != null ? ValueKey<String>(semanticsId!) : null,
         padding: const EdgeInsets.symmetric(vertical: 8),
         itemCount: items.length,
         itemBuilder: (context, index) {
@@ -98,7 +83,7 @@ class _ModelCard extends StatelessWidget {
       identifier: semanticsId,
       label: 'Model: ${model.name}',
       child: Card(
-        key: semanticsId != null ? ValueKey(semanticsId) : null,
+        key: semanticsId != null ? ValueKey<String>(semanticsId!) : null,
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
         child: Padding(
           padding: const EdgeInsets.all(16),

@@ -22,7 +22,7 @@ class Dropdown<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final dropdown = DropdownButton<T>(
-      key: semanticsIdentifier != null ? ValueKey(semanticsIdentifier) : null,
+      key: semanticsIdentifier != null ? ValueKey<String>(semanticsIdentifier!) : null,
       value: value,
       onChanged: onChanged,
       items: items,

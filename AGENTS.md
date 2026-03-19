@@ -1,25 +1,35 @@
 # Agent Guidelines for khs-flutter-example
 
-lib/src/localization - all user facing text for the app
-lib/src/models - all basic data structures for the app
-lib/src/utils - classless, static utilities which can be used anywhere in the app
-lib/src/clients - device-level clients
-lib/src/services - all business logic for the app
-lib/src/controllers - all control logic for the app
-lib/src/components - all reusable UI components for the app
-lib/src/views - all views for the app
-lib/src/app.dart - main app file
-lib/src/router.dart - router for the app
-lib/main.dart - main entry point for the app
+Guidelines for AI coding agents working on this Flutter project.
 
-- Follow existing patterns in the codebase (MVC-like pattern)
-- Keep layers separated (clients → services → controllers → views)
-- Do not skip layers; clients are not consumed by controllers, services are not consumed by views, etc.
-- Avoid cross-dependencies at the Client, Service, and Control layers (clients should not depend on other clients, services should not depend on other services, controllers should not depend on other controllers)
-- Use dependency injection where possible
-- Use singleton patterns where possible
-- Make data structures immutable and create models for them
-- Document your changes in docs/ at the root, never directly at the root level
-- Trust, but verify, everything the user tells you, or that you find in a web search.
+## Project Architecture
+
+Clean architecture with clear separation of concerns:
+
+```
+lib/
+├── main.dart                 # App entry point, initialization
+├── src/
+    ├── app.dart              # App configuration (themes, localization)
+    ├── router.dart           # Centralized routing logic
+    ├── clients/              # Low-level data access (API, storage, device)
+    ├── services/             # Business logic, consumes clients
+    ├── controllers/          # State management, consumes services
+    ├── models/               # Data structures, shared across layers
+    ├── views/                # Top level UI views
+    ├── components/           # Reusable UI components
+    └── localization/         # Generated i18n files
+```
+
+## Core Principles
+
+1. Follow existing patterns (MVC-like)
+2. Keep layers separated (clients → services → controllers → views)
+3. Do not skip layers
+4. Avoid cross-dependencies within same layer
+5. Use dependency injection
+6. Make data structures immutable
+7. Document changes
+8. Trust, but verify
 
 ---

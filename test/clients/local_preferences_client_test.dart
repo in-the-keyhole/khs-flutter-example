@@ -351,12 +351,12 @@ void main() {
 
         // Store as string
         await client.setString(key, 'text');
-        var stringValue = await client.getString(key);
+        final stringValue = await client.getString(key);
         expect(stringValue, equals('text'));
 
         // Overwrite with int - this replaces the string value
         await client.setInt(key, 123);
-        var intValue = await client.getInt(key);
+        final intValue = await client.getInt(key);
         expect(intValue, equals(123));
 
         // Now contains key exists, but as int not string

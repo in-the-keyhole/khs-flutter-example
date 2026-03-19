@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../clients/local_filesystem_client.dart';
 import '../clients/download_llm_client.dart';
+import '../clients/local_filesystem_client.dart';
 import '../components/molecules/chat_input.dart';
 import '../components/molecules/model_status.dart';
 import '../components/organisms/chat_message_list.dart';
@@ -71,8 +71,8 @@ class _LlmChatViewState extends State<LlmChatView> {
   }
 
   void _handleLoadModel() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
+    Navigator.of(context).push<void>(
+      MaterialPageRoute<void>(
         builder: (context) => LlmModelsView(
           llmController: widget.llmController,
           filesystemClient: widget.filesystemClient,
@@ -87,7 +87,7 @@ class _LlmChatViewState extends State<LlmChatView> {
     final localizations = AppLocalizations.of(context)!;
     final renameController = TextEditingController(text: currentTitle);
 
-    showDialog(
+    showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(localizations.renameDialogTitle),
@@ -125,7 +125,7 @@ class _LlmChatViewState extends State<LlmChatView> {
   void _showDeleteDialog(String id) {
     final localizations = AppLocalizations.of(context)!;
 
-    showDialog(
+    showDialog<void>(
       context: context,
       builder: (context) => AlertDialog(
         title: Text(localizations.deleteConversation),
@@ -288,8 +288,8 @@ class _LlmChatViewState extends State<LlmChatView> {
                     widget.llmController.unloadModel();
                     break;
                   case 'settings':
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
+                    Navigator.of(context).push<void>(
+                      MaterialPageRoute<void>(
                         builder: (_) => SettingsView(
                           controls: widget.controls,
                           llmController: widget.llmController,

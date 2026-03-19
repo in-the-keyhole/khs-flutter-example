@@ -13,9 +13,9 @@ import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 class MockPathProvider extends Fake
     with MockPlatformInterfaceMixin
     implements PathProviderPlatform {
-  final String testPath;
-
   MockPathProvider(this.testPath);
+
+  final String testPath;
 
   @override
   Future<String?> getApplicationDocumentsPath() async => testPath;
@@ -59,12 +59,6 @@ class MockHttpClient extends http.BaseClient {
 
 /// Mock response for testing
 class MockResponse {
-  final int statusCode;
-  final Uint8List body;
-  final Map<String, String> headers;
-  final int chunkSize;
-  final Duration? delayPerChunk;
-
   MockResponse({
     this.statusCode = 200,
     required this.body,
@@ -73,6 +67,12 @@ class MockResponse {
     this.delayPerChunk,
   });
 
+  final int statusCode;
+  final Uint8List body;
+  final Map<String, String> headers;
+  final int chunkSize;
+  final Duration? delayPerChunk;
+
   http.StreamedResponse toStreamedResponse() {
     final controller = StreamController<List<int>>();
 
@@ -80,7 +80,7 @@ class MockResponse {
     () async {
       for (var i = 0; i < body.length; i += chunkSize) {
         if (delayPerChunk != null) {
-          await Future.delayed(delayPerChunk!);
+          await Future<void>.delayed(delayPerChunk!);
         }
         final end = (i + chunkSize > body.length) ? body.length : i + chunkSize;
         controller.add(body.sublist(i, end));
@@ -116,10 +116,10 @@ void main() {
       downloadClient = DownloadLlmClient(httpClient: mockHttpClient);
     });
 
-    tearDown(() async {
+    tearDown(() {
       // Clean up temp directory
-      if (await tempDir.exists()) {
-        await tempDir.delete(recursive: true);
+      if (tempDir.existsSync()) {
+        tempDir.deleteSync(recursive: true);
       }
     });
 
@@ -137,7 +137,7 @@ void main() {
     group('getModelsDirectory', () {
       test('should create and return models directory', () async {
         final modelsDir = await downloadClient.getModelsDirectory();
-        expect(await modelsDir.exists(), isTrue);
+        expect(modelsDir.existsSync(), isTrue);
         expect(modelsDir.path, contains('models'));
       });
 
@@ -167,8 +167,8 @@ void main() {
         expect(path, contains('model.gguf'));
 
         final file = File(path!);
-        expect(await file.exists(), isTrue);
-        expect(await file.readAsBytes(), equals(testData));
+        expect(file.existsSync(), isTrue);
+        expect(file.readAsBytesSync(), equals(testData));
       });
 
       test('should report progress during download', () async {
@@ -261,7 +261,7 @@ void main() {
         );
 
         // Cancel after download starts
-        await Future.delayed(const Duration(milliseconds: 50));
+        await Future<void>.delayed(const Duration(milliseconds: 50));
         downloadClient.cancelDownload();
 
         final result = await downloadFuture;
@@ -301,7 +301,7 @@ void main() {
 
         final deleted = await downloadClient.deleteModel(file.path);
         expect(deleted, isTrue);
-        expect(await file.exists(), isFalse);
+        expect(file.existsSync(), isFalse);
       });
 
       test('should return false for non-existent model', () async {
@@ -348,9 +348,9 @@ void main() {
 
         await downloadClient.cleanupPartialDownloads();
 
-        expect(await partial1.exists(), isFalse);
-        expect(await partial2.exists(), isFalse);
-        expect(await complete.exists(), isTrue);
+        expect(partial1.existsSync(), isFalse);
+        expect(partial2.existsSync(), isFalse);
+        expect(complete.existsSync(), isTrue);
       });
     });
 

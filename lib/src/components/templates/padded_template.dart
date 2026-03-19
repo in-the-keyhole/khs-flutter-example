@@ -19,7 +19,7 @@ class ColumnTemplate extends StatelessWidget {
       identifier: semanticsId,
       label: 'Column template',
       child: Padding(
-        key: semanticsId != null ? ValueKey(semanticsId) : null,
+        key: semanticsId != null ? ValueKey<String>(semanticsId!) : null,
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

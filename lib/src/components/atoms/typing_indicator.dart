@@ -45,14 +45,14 @@ class _TypingIndicatorState extends State<TypingIndicator>
       for (int i = 0; i < _controllers.length; i++) {
         if (!mounted) return;
         _controllers[i].forward();
-        await Future.delayed(const Duration(milliseconds: 150));
+        await Future<void>.delayed(const Duration(milliseconds: 150));
       }
-      await Future.delayed(const Duration(milliseconds: 100));
+      await Future<void>.delayed(const Duration(milliseconds: 100));
       for (final controller in _controllers) {
         if (!mounted) return;
         controller.reverse();
       }
-      await Future.delayed(const Duration(milliseconds: 300));
+      await Future<void>.delayed(const Duration(milliseconds: 300));
     }
   }
 
@@ -72,7 +72,7 @@ class _TypingIndicatorState extends State<TypingIndicator>
       identifier: widget.semanticsId,
       label: 'Assistant is typing',
       child: Align(
-        key: widget.semanticsId != null ? ValueKey(widget.semanticsId) : null,
+        key: widget.semanticsId != null ? ValueKey<String>(widget.semanticsId!) : null,
         alignment: Alignment.centerLeft,
         child: Container(
           margin: const EdgeInsets.symmetric(vertical: 4),

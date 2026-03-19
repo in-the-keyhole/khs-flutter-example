@@ -21,6 +21,7 @@ dependencies:
   fllama: ^0.0.1
   file_picker: ^10.3.10
   http: ^1.6.0
+  mcp_dart: ^0.2.0
 
 dependency_overrides:
   fllama:

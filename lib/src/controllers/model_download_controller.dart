@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 
 import '../clients/download_llm_client.dart';
-import '../components/organisms/model_browser.dart';
 import '../models/model_registry.dart';
+import '../models/objects/model_browser_item.dart';
 
 /// Controller that manages model download state across the app.
 ///
@@ -76,7 +76,7 @@ class ModelDownloadController with ChangeNotifier {
         // Cancelled or failed
         item.status = ModelDownloadStatus.notDownloaded;
       }
-    } catch (e) {
+    } on Exception catch (e) {
       item.status = ModelDownloadStatus.notDownloaded;
       debugPrint('[ModelDownloadController] Download error: $e');
     }

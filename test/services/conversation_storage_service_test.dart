@@ -129,8 +129,7 @@ void main() {
         final conversation = createTestConversation(
           messages: [
             const ChatMessage(content: 'Hello', isUser: true, id: 'msg_1'),
-            const ChatMessage(
-                content: 'Hi there!', isUser: false, id: 'msg_2'),
+            const ChatMessage(content: 'Hi there!', isUser: false, id: 'msg_2'),
           ],
         );
 
@@ -156,7 +155,7 @@ void main() {
         await service.saveAll(conversations);
 
         final file = File('${tempDir.path}/conversations.json');
-        expect(await file.exists(), isTrue);
+        expect(file.existsSync(), isTrue);
 
         final contents = await file.readAsString();
         final decoded = jsonDecode(contents) as List;
@@ -190,8 +189,7 @@ void main() {
       test('should preserve messages in saved conversations', () async {
         final conversation = createTestConversation(
           messages: [
-            const ChatMessage(
-                content: 'Test message', isUser: true, id: 'm1'),
+            const ChatMessage(content: 'Test message', isUser: true, id: 'm1'),
           ],
         );
 
@@ -208,10 +206,10 @@ void main() {
         await service.saveAll([createTestConversation()]);
 
         final file = File('${tempDir.path}/conversations.json');
-        expect(await file.exists(), isTrue);
+        expect(file.existsSync(), isTrue);
 
         await service.deleteFile();
-        expect(await file.exists(), isFalse);
+        expect(file.existsSync(), isFalse);
       });
 
       test('should not throw when file does not exist', () async {
@@ -235,8 +233,7 @@ void main() {
           title: 'Round Trip Test',
           messages: [
             const ChatMessage(content: 'User msg', isUser: true, id: 'u1'),
-            const ChatMessage(
-                content: 'Bot response', isUser: false, id: 'b1'),
+            const ChatMessage(content: 'Bot response', isUser: false, id: 'b1'),
           ],
           createdAt: now,
           updatedAt: now,

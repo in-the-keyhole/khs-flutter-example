@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../clients/local_filesystem_client.dart';
 import '../clients/download_llm_client.dart';
+import '../clients/local_filesystem_client.dart';
 import '../components/molecules/dropdown.dart';
 import '../components/organisms/section.dart';
 import '../components/templates/padded_template.dart';
@@ -146,8 +146,8 @@ class _SettingsViewState extends State<SettingsView> {
                       ),
                     OutlinedButton.icon(
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
+                        Navigator.of(context).push<void>(
+                          MaterialPageRoute<void>(
                             builder: (_) => LlmModelsView(
                               llmController: widget.llmController,
                               filesystemClient: widget.filesystemClient,

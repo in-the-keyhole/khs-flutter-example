@@ -31,7 +31,7 @@ class ModelStatus extends StatelessWidget {
       identifier: semanticsId,
       label: 'Model status',
       child: Container(
-        key: semanticsId != null ? ValueKey(semanticsId) : null,
+        key: semanticsId != null ? ValueKey<String>(semanticsId!) : null,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: _getBackgroundColor(colorScheme),

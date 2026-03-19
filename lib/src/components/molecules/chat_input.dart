@@ -33,7 +33,7 @@ class ChatInput extends StatelessWidget {
       identifier: semanticsId,
       label: 'Chat input',
       child: Container(
-        key: semanticsId != null ? ValueKey(semanticsId) : null,
+        key: semanticsId != null ? ValueKey<String>(semanticsId!) : null,
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           color: colorScheme.surface,
